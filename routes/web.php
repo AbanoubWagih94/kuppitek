@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    $department_name='dashboard';
+    $page_name='dashboard';
+    return view('/admin/dashboard' , compact('department_name' , 'page_name'));
+});
