@@ -1,0 +1,29 @@
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+li {
+    font-family: 'Cairo', sans-serif !important;
+}
+
+.select2.select2-container {
+    width: 100% !important;
+}
+
+
+/* Admin style*/
+
+.card-icon {
+    color: #FF4961;
+}
+
+.card-icon2 {
+    color: #1E9FF2;
+}
