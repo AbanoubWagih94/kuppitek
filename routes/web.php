@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\StaffController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,12 @@ Route::get('/dashboard', function () {
     $page_name='dashboard';
     return view('/admin/dashboard' , compact('department_name' , 'page_name'));
 });
+
+// Admin routes 
+
+Route::get('/dashboard/staff', [StaffController::class,'index']);
+Route::get('/dashboard/staff/add', [StaffController::class,'create']);
+Route::post('/dashboard/staff/add', [StaffController::class,'store'])->name('staff.store');
+Route::get('/dashboard/staff/edit/{id}', [StaffController::class,'edit']);
+Route::put('/dashboard/staff/update/{id}', [StaffController::class,'update'])->name('staff.update');
+Route::get('/dashboard/staff/delete/{id}', [StaffController::class,'destroy'])->name('staff.destroy');

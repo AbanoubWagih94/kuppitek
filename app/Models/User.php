@@ -9,4 +9,11 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    protected $fillable = ['role_id', 'user_name', 'name', 'password'];
+    protected $hidden = ['password'];
+
+    public function userRole() {
+       return $this->belongsTo(Role::class, 'role_id');
+    }
 }
