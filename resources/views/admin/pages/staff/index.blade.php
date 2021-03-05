@@ -20,10 +20,11 @@
                             @if(session('success'))
                                 <div class="alert alert-success m-2">
                                     {{ session('success') }}
+                                    {{ session()->forget('success') }}
                                 </div>
                             @elseif(session('error'))        
                             <div class="alert alert-danger m-2">
-                                {{ session('error') }}
+                                {{ session()->forget('error') }}
                             </div>
                             @endif
                             <table class="table table-de mb-0">

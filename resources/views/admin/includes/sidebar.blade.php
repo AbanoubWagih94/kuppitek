@@ -2,7 +2,7 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class="{{ $page_name == 'dashboard' ? 'active' : ''}}">
-                <a href="{{('dashboard')}}">
+                <a href="{{url('/dashboard')}}">
                     <i class="la la-home"></i>
                     <span class="menu-title" data-i18n="nav.changelog.main">لوحة التحكم</span>
                 </a>
