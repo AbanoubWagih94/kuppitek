@@ -20,11 +20,18 @@
                             @if(session('success'))
                                 <div class="alert alert-success m-2">
                                     {{ session('success') }}
+<<<<<<< HEAD
                                     {{ session()->forget('success') }}
                                 </div>
                             @elseif(session('error'))        
                             <div class="alert alert-danger m-2">
                                 {{ session()->forget('error') }}
+=======
+                                </div>
+                            @elseif(session('error'))        
+                            <div class="alert alert-danger m-2">
+                                {{ session('error') }}
+>>>>>>> 562035a9656416f6964f6b66c4e71496c2813570
                             </div>
                             @endif
                             <table class="table table-de mb-0">

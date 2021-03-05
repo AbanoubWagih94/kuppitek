@@ -11,24 +11,45 @@
             <div class="content-body">
                 <div class="row">
                     <div class="col-xl-4 col-12">
+<<<<<<< HEAD
+=======
+
+<a href="{{url('/dashboard/staff')}}">
+>>>>>>> 562035a9656416f6964f6b66c4e71496c2813570
                         <div class="card crypto-card-3 pull-up">
                             <div class="card-content text-center">
                                 <div class="card-body pb-0">
                                     <div class="row">
                                         <div class="col-12">
+<<<<<<< HEAD
                                             <h1><a href="{{ url('/dashboard/staff') }}"><i class="fas fa-id-card-alt fa-2x card-icon" title=""></i></a></h1>
+=======
+                                            <h1><i class="fas fa-id-card-alt fa-2x card-icon" title=""></i></h1>
+>>>>>>> 562035a9656416f6964f6b66c4e71496c2813570
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 562035a9656416f6964f6b66c4e71496c2813570
                                     <div class="col-12">
                                         <h1 class="text-muted">Staff</h1>
                                     </div>
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
                     </div>
                     <div class="col-xl-4 col-12">
+=======
+                        </a>
+                    </div>
+                    <div class="col-xl-4 col-12">
+                    <a href="{{route('category.index')}}">
+>>>>>>> 562035a9656416f6964f6b66c4e71496c2813570
                         <div class="card crypto-card-3 pull-up">
                             <div class="card-content text-center">
                                 <div class="card-body pb-0">
@@ -45,8 +66,16 @@
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
                     </div>
                     <div class="col-xl-4 col-12">
+=======
+                        </a>
+                    </div>
+                    <div class="col-xl-4 col-12">
+                    <a href="{{route('menuitem.index')}}">
+
+>>>>>>> 562035a9656416f6964f6b66c4e71496c2813570
                         <div class="card crypto-card-3 pull-up">
                             <div class="card-content text-center">
                                 <div class="card-body pb-0">
@@ -63,6 +92,11 @@
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
+=======
+                    </a>
+
+>>>>>>> 562035a9656416f6964f6b66c4e71496c2813570
                     </div>   
                 </div>
                 <div class="row">
@@ -108,7 +142,11 @@
                                 <div class="card-body pb-0">
                                     <div class="row">
                                         <div class="col-12">
+<<<<<<< HEAD
                                             <h1><a href="{{ url('dashboard/tables') }}"><i class="fas fa-microchip fa-2x card-icon2" title=""></i></a></h1>
+=======
+                                            <h1><i class="fas fa-microchip fa-2x card-icon2" title=""></i></h1>
+>>>>>>> 562035a9656416f6964f6b66c4e71496c2813570
                                         </div>
                                     </div>
                                 </div>

@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\admin\StaffController;
+<<<<<<< HEAD
 use App\Http\Controllers\admin\TablesControllers;
+=======
+>>>>>>> 562035a9656416f6964f6b66c4e71496c2813570
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,13 +30,17 @@ Route::get('/dashboard', function () {
 
 // Admin routes 
 
+<<<<<<< HEAD
 // Staff routes
+=======
+>>>>>>> 562035a9656416f6964f6b66c4e71496c2813570
 Route::get('/dashboard/staff', [StaffController::class,'index']);
 Route::get('/dashboard/staff/add', [StaffController::class,'create']);
 Route::post('/dashboard/staff/add', [StaffController::class,'store'])->name('staff.store');
 Route::get('/dashboard/staff/edit/{id}', [StaffController::class,'edit']);
 Route::put('/dashboard/staff/update/{id}', [StaffController::class,'update'])->name('staff.update');
 Route::get('/dashboard/staff/delete/{id}', [StaffController::class,'destroy'])->name('staff.destroy');
+<<<<<<< HEAD
 
 // tables routes
 Route::get('/dashboard/tables', [TablesControllers::class,'index']);
@@ -42,3 +49,7 @@ Route::post('/dashboard/tables/add', [TablesControllers::class,'store'])->name('
 Route::get('/dashboard/tables/edit/{id}', [TablesControllers::class,'edit']);
 Route::put('/dashboard/tables/update/{id}', [TablesControllers::class,'update'])->name('table.update');
 Route::get('/dashboard/tables/delete/{id}', [TablesControllers::class,'destroy'])->name('table.destroy');
+=======
+Route::resource("category","\App\Http\Controllers\admin\CategoryController");
+Route::resource("menuitem","\App\Http\Controllers\admin\MenuItemController");
+>>>>>>> 562035a9656416f6964f6b66c4e71496c2813570
