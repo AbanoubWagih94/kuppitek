@@ -32,5 +32,7 @@ Route::post('/dashboard/staff/add', [StaffController::class,'store'])->name('sta
 Route::get('/dashboard/staff/edit/{id}', [StaffController::class,'edit']);
 Route::put('/dashboard/staff/update/{id}', [StaffController::class,'update'])->name('staff.update');
 Route::get('/dashboard/staff/delete/{id}', [StaffController::class,'destroy'])->name('staff.destroy');
+
 Route::resource("category","\App\Http\Controllers\admin\CategoryController");
 Route::resource("menuitem","\App\Http\Controllers\admin\MenuItemController");
+
