@@ -113,9 +113,11 @@ class StaffController extends Controller
 
         if (!$user) {
             $request->session()->put('error', 'حدث خطأ ما حاول مره اخرى!');
+                
             return redirect()->back();
         }
-        $request->session()->put('success', 'تمت تعديل بيانات الموظف بنجاح');
+        session()->flash('alert_message', ['message'=>"تمت تعديل بيانات الموظف بنجاح", 'icon'=>'ؤمخسث']);
+        //$request->session()->put('success', 'تمت تعديل بيانات الموظف بنجاح');
         return redirect('/dashboard/staff');
     }
 

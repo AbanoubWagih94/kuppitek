@@ -2,11 +2,7 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class="{{ $page_name == 'dashboard' ? 'active' : ''}}">
-<<<<<<< HEAD
-                <a href="{{url('/dashboard')}}">
-=======
                 <a href="{{url('dashboard')}}">
->>>>>>> 562035a9656416f6964f6b66c4e71496c2813570
                     <i class="la la-home"></i>
                     <span class="menu-title" data-i18n="nav.changelog.main">لوحة التحكم</span>
                 </a>
