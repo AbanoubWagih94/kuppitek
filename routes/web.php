@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\StaffController;
+use App\Http\Controllers\admin\TablesControllers;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,3 +37,26 @@ Route::get('/dashboard/staff/delete/{id}', [StaffController::class,'destroy'])->
 Route::resource("category","\App\Http\Controllers\admin\CategoryController");
 Route::resource("menuitem","\App\Http\Controllers\admin\MenuItemController");
 
+
+
+// tables routes
+Route::get('/dashboard/tables', [TablesControllers::class,'index']);
+Route::get('/dashboard/tables/add', [TablesControllers::class,'create']);
+Route::post('/dashboard/tables/add', [TablesControllers::class,'store'])->name('table.store');
+Route::get('/dashboard/tables/edit/{id}', [TablesControllers::class,'edit']);
+Route::put('/dashboard/tables/update/{id}', [TablesControllers::class,'update'])->name('table.update');
+Route::get('/dashboard/tables/delete/{id}', [TablesControllers::class,'destroy'])->name('table.destroy');
+Route::resource("category","\App\Http\Controllers\admin\CategoryController");
+Route::resource("menuitem","\App\Http\Controllers\admin\MenuItemController");
+Route::get("/order","\App\Http\Controllers\admin\CartController@index");
+
+Route::get('/addorder/{id}', '\App\Http\Controllers\admin\CartController@storeCart');
+Route::get('/allorder', '\App\Http\Controllers\admin\CartController@order');
+Route::post('/allorder', '\App\Http\Controllers\admin\CartController@saveOrder');
+Route::get('/clearCart', '\App\Http\Controllers\admin\CartController@clearCart');
+Route::post('/deleteItemCart', '\App\Http\Controllers\admin\CartController@deleteItemCart');
+// Auth::routes();
+Route::get('/getitem', '\App\Http\Controllers\admin\CartController@getitem');
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);

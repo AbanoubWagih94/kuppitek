@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class OrderItems extends Model
 {
     use HasFactory;
+    protected $guarded=[];
+
+    public function order(){
+        return $this->belongsTo('App\Models\Order','order_id','id');
+    }
+    public function item(){
+        return $this->belongsTo('App\Models\MenuItems','item_id','id');
+    }
 }

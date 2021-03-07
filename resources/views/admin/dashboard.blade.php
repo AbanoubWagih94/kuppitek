@@ -11,30 +11,24 @@
             <div class="content-body">
                 <div class="row">
                     <div class="col-xl-4 col-12">
-
-<a href="{{url('/dashboard/staff')}}">
                         <div class="card crypto-card-3 pull-up">
                             <div class="card-content text-center">
                                 <div class="card-body pb-0">
                                     <div class="row">
                                         <div class="col-12">
-                                            <h1><i class="fas fa-id-card-alt fa-2x card-icon" title=""></i></h1>
+                                            <h1><a href="{{ url('/dashboard/staff') }}"><i class="fas fa-id-card-alt fa-2x card-icon" title=""></i></a></h1>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-
-
                                     <div class="col-12">
                                         <h1 class="text-muted">Staff</h1>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        </a>
                     </div>
                     <div class="col-xl-4 col-12">
-                    <a href="{{route('category.index')}}">
                         <div class="card crypto-card-3 pull-up">
                             <div class="card-content text-center">
                                 <div class="card-body pb-0">
@@ -51,11 +45,8 @@
                                 </div>
                             </div>
                         </div>
-                        </a>
                     </div>
                     <div class="col-xl-4 col-12">
-                    <a href="{{route('menuitem.index')}}">
-
                         <div class="card crypto-card-3 pull-up">
                             <div class="card-content text-center">
                                 <div class="card-body pb-0">
@@ -72,8 +63,6 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
-
                     </div>   
                 </div>
                 <div class="row">
@@ -119,7 +108,7 @@
                                 <div class="card-body pb-0">
                                     <div class="row">
                                         <div class="col-12">
-                                            <h1><i class="fas fa-microchip fa-2x card-icon2" title=""></i></h1>
+                                            <h1><a href="{{ url('dashboard/tables') }}"><i class="fas fa-microchip fa-2x card-icon2" title=""></i></a></h1>
                                         </div>
                                     </div>
                                 </div>

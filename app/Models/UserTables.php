@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class UserTables extends Model
 {
     use HasFactory;
+    protected $fillable =['user_id', 'table_id'];
 }
