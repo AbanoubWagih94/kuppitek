@@ -15,17 +15,8 @@
                         <h4 class="card-title">تعديل البيانات</h4>
                     </div>
                     <div class="card-content">
-                        @if($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                            @foreach($errors->all() as $error)
-                                <li>
-                                    {{ $error }}
-                                </li>
-                            @endforeach
-                            </ul>
-                        </div>
-                        @elseif(session('error'))
+                        @include('admin.includes.errors')
+                        @if(session('error'))
                             <div class="alert alert-danger">
                                 {{ session('error') }}
                                 {{ session()->forget('error') }}

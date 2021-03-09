@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "mappings": "AAAA;;EAEE;AAIF,AAEC,IAFG,AAAA,UAAU,AAAA,YAAY,CAEzB,QAAQ;AAFT,IAAI,AAAA,UAAU,AAAA,YAAY,CAGzB,YAAY,CACZ;EACC,mBAAmB,EAAE,EAAE;CACvB",
+    "sources": [
+        "jquery.mmenu.dragopen.scss",
+        "../_imp/_import.scss",
+        "../_imp/_variables.scss",
+        "../_imp/_mixins_colors.scss",
+        "../_imp/_mixins_general.scss",
+        "../_imp/_mixins_sizing.scss"
+    ],
+    "names": [],
+    "file": "jquery.mmenu.dragopen.css"
+}

@@ -68,7 +68,7 @@ class TablesControllers extends Controller
                     'table_id'=> $table->id
                 ]);
             }
-        $request->session()->put('success', 'تمت أضافة الطاولة بنجاح');
+            session()->flash('alert_message', ['message'=>"تمت أضافة الطاولة بنجاح", 'icon'=>'success']);
         }   
         return redirect('/dashboard/tables');
     }
@@ -133,7 +133,7 @@ class TablesControllers extends Controller
                     ]);
                 } 
             }
-        $request->session()->put('success', 'تمت تعديل بيانات الطاولة بنجاح');
+            session()->flash('alert_message', ['message'=>"تمت تعديل بيانات الطاولة بنجاح", 'icon'=>'success']);    
         } 
         
         return redirect('/dashboard/tables');
@@ -150,7 +150,7 @@ class TablesControllers extends Controller
         $table = Table::find($id);
         if($table) {
             $table->delete();
-            session()->put('success', 'تمت حذف الطاولة بنجاح');
+            session()->flash('alert_message', ['message'=>"تمت حذف الطاولة بنجاح", 'icon'=>'success']);           
         } else {
             session()->put('error', 'حدث خطأ ما حاول مرة اخرى');
         }

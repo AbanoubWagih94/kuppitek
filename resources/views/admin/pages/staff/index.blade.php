@@ -17,19 +17,12 @@
                     </div>
                     <div class="card-content">
                         <div class="table-responsive">
-                            @if(session('success'))
-                                <div class="alert alert-success m-2">
-                                    {{ session('success') }}
-                                    {{ session()->forget('success') }}
-                                </div>
-                            @elseif(session('error'))        
-                            <div class="alert alert-danger m-2">
-                                {{ session()->forget('error') }}
-                                </div>
-                            @elseif(session('error'))        
+                            @include('admin.includes.errors')
+                            @if(session('error'))        
                             <div class="alert alert-danger m-2">
                                 {{ session('error') }}
-                            </div>
+                                {{ session()->forget('error') }}
+                                </div>      
                             @endif
                             <table class="table table-de mb-0">
                                 <thead>
@@ -52,7 +45,7 @@
                                             <a href="{{ url('/dashboard/staff/edit', $user->id) }}" class="btn btn-sm round btn-outline-info">Edit</a>
                                         </td>
                                         <td>
-                                            <a href="{{ url('/dashboard/staff/delete', $user->id) }}" class="btn btn-sm round btn-outline-danger">Remove</a>
+                                            <a href="{{ url('/dashboard/staff/delete', $user->id) }}" class="btn btn-sm round btn-outline-danger" onclick="return confirm('هل انت متاكد من حذف هذا العنصر')">Remove</a>
                                         </td>
                                     </tr>
                                     @endif

@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-header">
                         <a href="{{ route('menuitem.create') }}" class="btn btn-md round btn-outline-primary float-right">أضافة منيو</a>
-                        <h4 class="card-title"> المنيو</h4>
+                        <h4 class="card-title"> عناصر المنيو</h4>
                     </div>
                     <div class="card-content">
                         <div class="table-responsive">

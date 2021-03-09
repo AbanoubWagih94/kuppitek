@@ -50,7 +50,7 @@ class MenuItemController extends Controller
             'cost'=>$request->cost,
             ]);
         // $request->session()->put('success', 'تمت أضافة القسم بنجاح');
-        session()->flash('alert_message', ['message'=>"تم اضافه  المنيو بنجاح", 'icon'=>'success']);        
+        session()->flash('alert_message', ['message'=>"تم اضافه  العنصر بنجاح", 'icon'=>'success']);        
 
         return redirect('/menuitem');
     }
@@ -96,7 +96,7 @@ class MenuItemController extends Controller
         $menu->category_id = $request->category_id;
         $menu->cost = $request->cost;
         $menu->save();
-        session()->flash('alert_message', ['message'=>"تم تعديل المنيو بنجاح", 'icon'=>'success']);        
+        session()->flash('alert_message', ['message'=>"تم تعديل العنصر بنجاح", 'icon'=>'success']);        
 
         return redirect('/menuitem');
     }
@@ -111,7 +111,7 @@ class MenuItemController extends Controller
     {
         $menu=  MenuItems::find($id);
         $menu->delete();
-        session()->flash('alert_message', ['message'=>"تم حذف المنيو بنجاح", 'icon'=>'error']);        
+        session()->flash('alert_message', ['message'=>"تم حذف العنصر بنجاح", 'icon'=>'error']);        
         return redirect('/menuitem');
     }
 }

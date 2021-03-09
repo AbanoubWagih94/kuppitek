@@ -62,7 +62,7 @@ class StaffController extends Controller
             $request->session()->put('error', 'حدث خطأ ما حاول مره اخرى!');
             return redirect()->back();
         }
-        $request->session()->put('success', 'تمت أضافة الموظف بنجاح');
+        session()->flash('alert_message', ['message'=>"تمت أضافة الموظف بنجاح", 'icon'=>'success']);
         return redirect('/dashboard/staff');
     }
 
@@ -116,7 +116,7 @@ class StaffController extends Controller
                 
             return redirect()->back();
         }
-        session()->flash('alert_message', ['message'=>"تمت تعديل بيانات الموظف بنجاح", 'icon'=>'ؤمخسث']);
+        session()->flash('alert_message', ['message'=>"تمت تعديل بيانات الموظف بنجاح", 'icon'=>'success']);
         //$request->session()->put('success', 'تمت تعديل بيانات الموظف بنجاح');
         return redirect('/dashboard/staff');
     }
@@ -132,7 +132,7 @@ class StaffController extends Controller
         $user = User::find($id);
         if($user) {
             $user->delete();
-            session()->put('success', 'تمت حذف بيانات الموظف بنجاح');
+            session()->flash('alert_message', ['message'=>"تمت حذف بيانات الموظف بنجاح", 'icon'=>'success']);
         } else {
             session()->put('error', 'حدث خطأ ما حاول مرة اخرى');
         }
