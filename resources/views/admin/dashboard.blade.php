@@ -77,23 +77,25 @@
                     </div>   
                 </div>
                 <div class="row">
-                    <div class="col-xl-4 col-12">
-                        <div class="card crypto-card-3 pull-up">
-                            <div class="card-content text-center">
-                                <div class="card-body pb-0">
+                    <a href="{{url('/dashboard/orders')}}">
+                        <div class="col-xl-4 col-12">
+                            <div class="card crypto-card-3 pull-up">
+                                <div class="card-content text-center">
+                                    <div class="card-body pb-0">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h1><i class="fas fa-file-alt fa-2x card-icon2" title=""></i></h1>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            <h1><i class="fas fa-file-alt fa-2x card-icon2" title=""></i></h1>
+                                            <h1 class="text-muted">Orders</h1>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h1 class="text-muted">Orders</h1>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
+                    </a>
                     </div>
                     <div class="col-xl-4 col-12">
                         <div class="card crypto-card-3 pull-up">

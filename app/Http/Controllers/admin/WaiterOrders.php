@@ -32,6 +32,7 @@ class WaiterOrders extends Controller
             }
             
         }
+        session()->put('user',$user);
         return view('admin.pages.waiter_orders.index', ['user'=> $user, 'orders'=> $orders, 'page_name' => $page_name, 'department_name' => $department_name]);
     }
 
@@ -113,4 +114,14 @@ class WaiterOrders extends Controller
         session()->flash('alert_message', ['message'=>"تم أضافة الطلب إلى المطبخ", 'icon'=>'success']);
         return redirect()->back(); 
     }
+    public function addToTable($order_id) {
+        
+        $order = Order::find($order_id);
+        $order->order_status = 4;
+        $order->save(); 
+        session()->flash('alert_message', ['message'=>"الطلب الأن على الطاولة", 'icon'=>'success']);
+        $user = session('user');
+        return redirect()->route('kitchen.index', $user->id); 
+    }
+
 }

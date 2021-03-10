@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\KitchenController;
+use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\admin\StaffController;
 use App\Http\Controllers\admin\TablesControllers;
 use App\Http\Controllers\admin\UserController;
@@ -39,6 +41,10 @@ Route::get('/dashboard/staff/edit/{id}', [StaffController::class, 'edit']);
 Route::put('/dashboard/staff/update/{id}', [StaffController::class, 'update'])->name('staff.update');
 Route::get('/dashboard/staff/delete/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
 
+// orders routes
+Route::get('/dashboard/orders', [OrdersController::class, 'index']);
+Route::get('/dashboard/orders/show/{id}', [OrdersController::class, 'show'])->name('orders.show');
+
 // tables routes
 Route::get('/dashboard/tables', [TablesControllers::class, 'index']);
 Route::get('/dashboard/tables/add', [TablesControllers::class, 'create']);
@@ -58,10 +64,16 @@ Route::resource('/users', '\App\Http\Controllers\admin\UserController');
 Route::post('users/login', [UserController::class, 'login'])->name('user.login');
 
 // waiter_orders page
-
 Route::get('/waiter_orders/{id}', [WaiterOrders::class, 'index'])->name('waiter.index');
 Route::get('/waiter_orders/show/{order_id}', [WaiterOrders::class, 'show'])->name('waiter.show');
 Route::get('/waiter_order/add/{order_id}', [WaiterOrders::class, 'addToKitchen'])->name('waiter.add');
+Route::get('/waiter_order/serve/{order_id}', [WaiterOrders::class, 'addToTable'])->name('waiter.toTable');
+
+// kitchen page
+Route::get('/kitchen', [KitchenController::class, 'index'])->name('kitchen.index');
+Route::get('/kitchen/show/{order_id}', [KitchenController::class, 'show'])->name('kitchen.show');
+Route::get('/waiter_order/finish/{order_id}', [KitchenController::class, 'finishOrder'])->name('kitchen.finish');
+
 
 // order Page
 Route::get("/order","\App\Http\Controllers\admin\CartController@index");
@@ -70,9 +82,17 @@ Route::get('/addorder/{id}', '\App\Http\Controllers\admin\CartController@storeCa
 Route::get('/allorder', '\App\Http\Controllers\admin\CartController@order');
 Route::post('/allorder/{table_number}', '\App\Http\Controllers\admin\CartController@saveOrder');
 Route::get('/clearCart', '\App\Http\Controllers\admin\CartController@clearCart');
-Route::get('/deleteItemCart/{id}', '\App\Http\Controllers\admin\CartController@deleteItemCart');
+Route::get('/deleteItemCart/{id}', '\App\Http\Controllers\admin\CartController@deleteItemCart')->name('cart.delete.item');
 // Auth::routes();
 Route::get('/getitem', '\App\Http\Controllers\admin\CartController@getitem');
+Route::get('/landpage', '\App\Http\Controllers\admin\CartController@landpage');
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/qr-code', function () 
+{
+    return QrCode::encoding('UTF-8')->generate(URL::to('/landpage?2'));
+});
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);

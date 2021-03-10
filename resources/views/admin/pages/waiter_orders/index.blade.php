@@ -1,5 +1,7 @@
 @extends('admin.app')
 
+@section('includes')
+@endsection
 @section('admin.content')
 <div class="app-content content">
     <div class="content-wrapper">
@@ -37,6 +39,7 @@
                                 <tbody>
                                     @foreach($orders as $key => $order)
                                     
+                                    @if($order->order_status < 4)
                                     <tr>
                                         <td>{{ $key +1 }}</td>
                                         <td>ِ{{ $order->table_id }}</td>
@@ -56,7 +59,7 @@
                                             <a href="{{ url('/waiter_orders/delete', $order->id) }}" class="btn btn-sm round btn-outline-danger" onclick="return confirm('هل انت متاكد من حذف هذا العنصر')">Remove</a>
                                         </td>
                                     </tr>
-                                    
+                                    @endif
                                     @endforeach
                                     
                                 </tbody>

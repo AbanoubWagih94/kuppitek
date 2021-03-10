@@ -14,6 +14,9 @@
                     <div class="card-header">
                          @if($order->order_status == 1)
                          <a href="{{ route('waiter.add', $order->id) }}" class="btn btn-md round btn-outline-primary float-right">أضافة الطلب إلى المطبخ</a>
+                         @elseif($order->order_status == 3)
+                         <a href="{{ route('waiter.toTable', $order->id) }}" class="btn btn-md round btn-outline-primary float-right">وضع الطلب على الطاولة</a>
+
                          @endif
                         <h4 class="card-title">الطلبات</h4>
                     </div>

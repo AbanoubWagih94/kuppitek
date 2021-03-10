@@ -54,7 +54,7 @@ class CartController extends Controller
         <div class="card border-0 mb-grid-gutter">
            
             <div class="card-body border mt-n1 py-4 text-center">
-                <h2 class="h5 mb-1">$item[title]</h2>
+                <h2 class="h5 mb-1" style="color:black;">$item[title]</h2>
                 <span class="d-block mb-3 font-size-xs text-muted">price  
                     <span class="font-weight-semibold">$item[cost]</span>
                 </span>
@@ -103,6 +103,8 @@ class CartController extends Controller
         $table_number = $table_number;
         $table = Table::where('table_number', $table_number)->first();
         $customer = Customer::where('phone_number', $phone)->first();
+        $table->table_status = 1;
+        $table->save();
         if (!$customer) {
             $customer = Customer::create([
                 'name' => $name,
@@ -164,5 +166,10 @@ class CartController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function landpage(){
+        $categories = MenuCategories::get();
+        return view('landpage',['categories'=>$categories]);
     }
 }

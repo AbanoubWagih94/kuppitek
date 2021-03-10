@@ -97,6 +97,8 @@ class UserController extends Controller
                 return redirect('/dashboard');
             } else if ($user->role_id == 2) {
                 return redirect()->route('waiter.index', $user->id);
+            } else if ($user->role_id == 3) {
+                return redirect()->route('kitchen.index');
             }
 
         } 
