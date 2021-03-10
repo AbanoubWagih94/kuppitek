@@ -57,6 +57,11 @@ Route::get('/clearCart', '\App\Http\Controllers\admin\CartController@clearCart')
 Route::post('/deleteItemCart', '\App\Http\Controllers\admin\CartController@deleteItemCart');
 // Auth::routes();
 Route::get('/getitem', '\App\Http\Controllers\admin\CartController@getitem');
+Route::get('/landpage', '\App\Http\Controllers\admin\CartController@landpage');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('qr-code', function () 
+{
+    return QrCode::encoding('UTF-8')->generate(URL::to('/landpage?2'));   
+});

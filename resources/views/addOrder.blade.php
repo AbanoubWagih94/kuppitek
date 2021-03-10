@@ -62,9 +62,9 @@
         
 
     <div class="container">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#cartModal">
+        {{-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#cartModal">
             View Cart
-          </button> 
+          </button>  --}}
    <div class="row">
 
 

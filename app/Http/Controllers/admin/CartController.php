@@ -28,37 +28,53 @@ class CartController extends Controller
     public function getitem(Request $request){
         // dd($request->all());
 
-
-    //     <div class="col-md-4 col-sm-6">
-    //     <div class="card border-0 mb-grid-gutter">
-           
-    //         <div class="card-body border mt-n1 py-4 text-center">
-    //             <h2 class="h5 mb-1">Clothing</h2>
-    //             <span class="d-block mb-3 font-size-xs text-muted">price  
-    //                 <span class="font-weight-semibold">$49.99</span>
-    //             </span>
-    //             <a class="btn btn-pill btn-outline-primary btn-sm" href="shop-style1-ls.html">add to order</a>
-    //         </div>
+    //     <div class="col-lg-6 menu-item filter-starters">
+    //     <img src="assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">
+    //     <div class="menu-content">
+    //       <a href="#">Lobster Bisque</a><span>$5.95</span> 
+    //       <a>Order Now</a>
     //     </div>
-    // </div>
+    //     <div class="menu-ingredients">
+    //       Lorem, deren, trataro, filede, nerada
+    //     </div>
+    //   </div>
     $html="";
         $MenuItems = MenuItems::where('category_id',$request->id)->get();
 foreach($MenuItems as $item){
     $html .= <<<line
-        <div class="col-md-4 col-sm-6">
-        <div class="card border-0 mb-grid-gutter">
-           
-            <div class="card-body border mt-n1 py-4 text-center">
-                <h2 class="h5 mb-1">$item[title]</h2>
-                <span class="d-block mb-3 font-size-xs text-muted">price  
-                    <span class="font-weight-semibold">$item[cost]</span>
-                </span>
-                <a class="btn btn-pill btn-outline-primary btn-sm" href="/addorder/$item[id]">add to order</a>
+    <div class="col-lg-6 menu-item filter-starters">
+    <img src="assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">
+    <div class="menu-content">
+    <a href="#">$item[title]</a><span> $item[cost] $</span> 
+          <a    onclick="addTocart($item[id])">Order To Now</a>
+
             </div>
-        </div>
     </div>
     line;
 }
+
+// public function getitem(Request $request){
+//     // dd($request->all());
+
+
+// $html="";
+//     $MenuItems = MenuItems::where('category_id',$request->id)->get();
+// foreach($MenuItems as $item){
+// $html .= <<<line
+//     <div class="col-md-4 col-sm-6">
+//     <div class="card border-0 mb-grid-gutter">
+       
+//         <div class="card-body border mt-n1 py-4 text-center">
+//             <h2 class="h5 mb-1">$item[title]</h2>
+//             <span class="d-block mb-3 font-size-xs text-muted">price  
+//                 <span class="font-weight-semibold">$item[cost]</span>
+//             </span>
+//             <a class="btn btn-pill btn-outline-primary btn-sm" href="/addorder/$item[id]">add to order</a>
+//         </div>
+//     </div>
+// </div>
+// line;
+// }
 
          return response()->json($html);
     }
@@ -70,6 +86,11 @@ foreach($MenuItems as $item){
     public function create()
     {
         //
+    }
+
+    public function landpage(){
+        $categories = MenuCategories::get();
+        return view('landpage',['categories'=>$categories]);
     }
 
     /**
@@ -101,7 +122,34 @@ foreach($MenuItems as $item){
        $cart =  Cart::add($id, $MenuItems->title, 1,$MenuItems->cost);
         // dd(Cart::content());
 
-        return back();
+$html_cart=''; 
+$total= Cart::subtotal() ;
+        foreach(Cart::content()  as $cart){
+$html_cart .= <<<line
+<tr>
+<td>$cart->name</td>
+<td>$cart->price</td>
+<td class="qty"><input type="text" class="form-control" id="input1" value="$cart->qty"></td>
+<td>
+  <a href="#" class="btn btn-danger btn-sm">
+    <i class="fa fa-times"></i>
+  </a>
+</td>
+</tr>
+
+line;            
+        }
+
+$subtota =<<<line2
+
+<h5>Total: <span class="price text-success"> $total</span></h5>
+
+line2;
+
+
+        return response()->json( ['html_cart'=>$html_cart,'sub'=>$subtota]);
+
+        // return back();
     }
     public function deleteItemCart(Request $request)
     {
