@@ -14,16 +14,15 @@ class WaiterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {  
         $page_name = "waiter_orders";
         $department_name = "waiter_orders";
-        $user = User::findOrFail($id);
+        $user = User::findOrFail(2);
         
         $orders = [];
         foreach($user->tables as $table) {
             $table_orders = Order::where('table_id', $table->id)->get();
-            
             foreach($table_orders as $table_order){
                 $order = $table_order;
                 if($order){
@@ -33,7 +32,7 @@ class WaiterController extends Controller
             
         }
         session()->put('user',$user);
-        return view('admin.pages.waiter_orders.index', ['user'=> $user, 'orders'=> $orders, 'page_name' => $page_name, 'department_name' => $department_name]);
+        return view('dashboard.pages.waiter.index', ['user'=> $user, 'orders'=> $orders, 'page_name' => $page_name, 'department_name' => $department_name]);
     }
 
     /**
@@ -68,7 +67,7 @@ class WaiterController extends Controller
         $page_name = "order_details";
         $department_name = "order_details";
         $order = Order::find($order_id);
-        return view('admin.pages.waiter_orders.show', ['order'=>$order, 'page_name'=>$page_name, 'department_name'=> $department_name]);
+        return view('dashboard.pages.waiter.show', ['order'=>$order, 'page_name'=>$page_name, 'department_name'=> $department_name]);
 
     }
 
@@ -111,7 +110,7 @@ class WaiterController extends Controller
         $order = Order::find($order_id);
         $order->order_status = 2;
         $order->save(); 
-        session()->flash('alert_message', ['message'=>"تم أضافة الطلب إلى المطبخ", 'icon'=>'success']);
+        session()->flash('alert_message', ['message'=>"Success", 'icon'=>'success']);
         return redirect()->back(); 
     }
     public function addToTable($order_id) {
@@ -119,9 +118,17 @@ class WaiterController extends Controller
         $order = Order::find($order_id);
         $order->order_status = 4;
         $order->save(); 
-        session()->flash('alert_message', ['message'=>"الطلب الأن على الطاولة", 'icon'=>'success']);
-        $user = session('user');
-        return redirect()->route('kitchen.index', $user->id); 
+        session()->flash('alert_message', ['message'=>"Success", 'icon'=>'success']);
+        return redirect()->back(); 
+    }
+
+    public function removeItemOrder($order_id){
+        $order = Order::destroy($order_id);
+        if(!$order) {
+            session()->flash('alert_message', ['message'=>"Something goes wrong please try again later!", 'icon'=>'error']);
+        }
+        session()->flash('alert_message', ['message'=>"Success", 'icon'=>'success']);
+        return redirect()->route('waiter.index');
     }
 
 }

@@ -1,8 +1,5 @@
-@extends('admin.app')
-
-@section('includes')
-@endsection
-@section('admin.content')
+@extends('dashboard.layouts.app')
+@section('dashboard.content')
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-header row">
@@ -15,25 +12,18 @@
                 <div class="card">
                     <div class="card-header">
                         
-                        <h4 class="card-title">الطلبات</h4>
                     </div>
                     <div class="card-content">
                         <div class="table-responsive">
-                            @include('admin.includes.errors')
-                            @if(session('error'))        
-                            <div class="alert alert-danger m-2">
-                                {{ session('error') }}
-                                {{ session()->forget('error') }}
-                                </div>      
-                            @endif
+                            @include('dashboard.includes.errors')
                             <table class="table table-de mb-0">
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>رقم الطاولة</th>
-                                        <th>حالة الطلب</th>
-                                        <th>تفاصيل الطلب</th>
-                                        <th>الغاء</th>
+                                        <th>Table Number</th>
+                                        <th>Order Status</th>
+                                        <th>Order Details</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,19 +34,19 @@
                                         <td>{{ $key +1 }}</td>
                                         <td>ِ{{ $order->table->table_number }}</td>
                                         @if( $order->order_status == 1)
-                                            <td>لم يخدم حتى الان</td>
+                                            <td>Order Not Served</td>
                                         @elseif($order->order_status == 2)
-                                        <td>الطلب فى المطبخ الان</td>    
+                                        <td>Order In Kitchen</td>    
                                         @elseif($order->order_status == 3)
-                                        <td>تم تجهيز الطلب</td>    
+                                        <td>Order Is Ready</td>    
                                         @elseif($order->order_status == 4)
-                                        <td>الطلب الان على الطاولة</td>    
+                                        <td>Order On Table Now</td>    
                                         @endif
                                         <td>
-                                            <a href="{{ url('/waiter_orders/show', $order->id) }}" class="btn btn-sm round btn-outline-info">تفاصيل الطلب</a>
+                                            <a href="{{ route('waiter.show', $order->id) }}" class="btn btn-sm round btn-outline-info">Order Details</a>
                                         </td>
                                         <td>
-                                            <a href="{{ url('/waiter_orders/delete', $order->id) }}" class="btn btn-sm round btn-outline-danger" onclick="return confirm('هل انت متاكد من حذف هذا العنصر')">Remove</a>
+                                            <a href="{{ route('waiter.destroy', $order->id) }}" class="btn btn-sm round btn-outline-danger" onclick="return confirm('Do you want to remove this order?!')">Remove</a>
                                         </td>
                                     </tr>
                                     @endif

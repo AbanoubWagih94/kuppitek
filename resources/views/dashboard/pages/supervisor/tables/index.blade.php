@@ -26,6 +26,7 @@
                                             <th>Table Number</th>
                                             <th>Table Status</th>
                                             <th>Table Waiters</th>
+                                            <th>Generate Qr Code</th>
                                             <th>Control</th>
                                             
                                         </tr>
@@ -42,6 +43,9 @@
                                                     @empty
                                                         <h3>No Waiters selected </h3>
                                                     @endforelse
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('qrcode', $table->table_number) }}"  class="btn btn-sm round btn-outline-info" target="_blank">Generate</a>
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('tables.edit', $table->id) }}" class="btn btn-sm round btn-outline-info">Edit</a>

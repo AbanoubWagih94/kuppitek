@@ -1,6 +1,6 @@
-@extends('admin.app')
+@extends('dashboard.layouts.app')
 
-@section('admin.content')
+@section('dashboard.content')
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-header row">
@@ -13,31 +13,23 @@
                 <div class="card">
                     <div class="card-header">
                          @if($order->order_status == 1)
-                         <a href="{{ route('waiter.add', $order->id) }}" class="btn btn-md round btn-outline-primary float-right">أضافة الطلب إلى المطبخ</a>
+                         <a href="{{ route('waiter.add', $order->id) }}" class="btn btn-md round btn-outline-primary float-right">Add To Kitchen</a>
                          @elseif($order->order_status == 3)
-                         <a href="{{ route('waiter.toTable', $order->id) }}" class="btn btn-md round btn-outline-primary float-right">وضع الطلب على الطاولة</a>
-
+                         <a href="{{ route('waiter.toTable', $order->id) }}" class="btn btn-md round btn-outline-primary float-right">Serve Order To Table</a>
                          @endif
-                        <h4 class="card-title">الطلبات</h4>
                     </div>
                     <div class="card-content">
                         <div class="table-responsive">
-                            @include('admin.includes.errors')
-                            @if(session('error'))        
-                            <div class="alert alert-danger m-2">
-                                {{ session('error') }}
-                                {{ session()->forget('error') }}
-                                </div>      
-                            @endif
+                            @include('dashboard.includes.errors')
                             <table class="table table-de mb-0">
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>اسم الطالب</th>
-                                        <th>العنصر</th>
-                                        <th>الكمية</th>
-                                        <th>التكلفة</th>
-                                        <th>الغاء</th>
+                                        <th>Customer Name</th>
+                                        <th>Item</th>
+                                        <th>Quentity</th>
+                                        <th>Cost</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,14 +37,18 @@
                                     
                                     <tr>
                                         <td>{{ $key +1 }}</td>
-                                        <td> {{  $order->user->name }}</td>
+                                        <td> {{  $order->customer->name }}</td>
                                         <td>ِ{{ $item->title }}</td>
                                         <td> {{ $item->pivot->item_qty  }} </td>
                                         <td>
                                             {{  $item->cost *$item->pivot->item_qty  }}
                                         </td>
                                         <td>
-                                            <a href="" class="btn btn-sm round btn-outline-danger" onclick="return confirm('هل انت متاكد من حذف هذا العنصر')">Remove</a>
+                                            <form action="{{ route('waiter.remove.item', $order->id) }}" method="post" class="btn-group">
+                                                @csrf
+                                                @method('delete')
+                                                 <button class="btn btn-sm round btn-outline-danger" onclick="return confirm('Do you want to remove this item?!')">Remove</button>
+                                             </form>
                                         </td>
                                     </tr>
                                     

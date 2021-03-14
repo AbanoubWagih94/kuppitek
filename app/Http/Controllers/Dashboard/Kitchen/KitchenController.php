@@ -18,7 +18,7 @@ class KitchenController extends Controller
         $page_name = "kitchen";
         $department_name = "kitchen";
         $orders = Order::where('order_status', 2)->get();
-        return view('admin.pages.kitchen.index', ['orders'=> $orders, 'page_name' => $page_name, 'department_name' => $department_name]);
+        return view('dashboard.pages.kitchen.index', ['orders'=> $orders, 'page_name' => $page_name, 'department_name' => $department_name]);
     
     }
 
@@ -54,7 +54,7 @@ class KitchenController extends Controller
         $page_name = "order_details";
         $department_name = "order_details";
         $order = Order::find($order_id);
-        return view('admin.pages.kitchen.show', ['order'=>$order, 'page_name'=>$page_name, 'department_name'=> $department_name]);
+        return view('dashboard.pages.kitchen.show', ['order'=>$order, 'page_name'=>$page_name, 'department_name'=> $department_name]);
     }
 
     /**
@@ -95,7 +95,7 @@ class KitchenController extends Controller
         $order = Order::find($order_id);
         $order->order_status = 3 ;
         $order->save();
-        session()->flash('alert_message', ['message'=>"تم تجهيز الطلب", 'icon'=>'success']);
-        return redirect('/kitchen'); 
+        session()->flash('alert_message', ['message'=>"Success", 'icon'=>'success']);
+        return redirect('dashboard/kitchen'); 
     }
 }
