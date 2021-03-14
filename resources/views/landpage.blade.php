@@ -37,7 +37,7 @@
 </head>
 
 <body>
-  @include('admin.includes.alerts')
+  @include('dashboard.includes.alerts')
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex">

@@ -2,7 +2,7 @@
 
         <!-- Fonts -->
         {{-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> --}}
-        @include('admin.includes.header')
+        @include('dashboard.includes.header')
 <style>
 
 
@@ -122,7 +122,7 @@
 
 </div>
 </div>   
-@include('admin.includes.footer') 
+@include('dashboard.includes.footer') 
 
 <script>
 

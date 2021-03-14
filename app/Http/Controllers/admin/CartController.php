@@ -114,8 +114,8 @@ class CartController extends Controller
             
         } 
         $order = Order::create([
-            'user_id' => $customer->id,
-            'table_id' => $table_number,
+            'customer_id' => $customer->id,
+            'table_id' => $table->id,
             'total_cost' => Cart::subtotal(),
             'order_status' => 1,
         ]);
@@ -131,7 +131,7 @@ class CartController extends Controller
 
         session()->flash('alert_message', ['message' => " your order has been  recieved", 'icon' => 'success']);
 
-        return redirect('/order');
+        return redirect('/landpage');
         //  dd($request->all());
     }
     /**

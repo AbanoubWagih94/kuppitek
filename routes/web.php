@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\admin\KitchenController;
-use App\Http\Controllers\admin\OrdersController;
-use App\Http\Controllers\admin\StaffController;
-use App\Http\Controllers\admin\TablesControllers;
-use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\admin\WaiterOrders;
+// use App\Http\Controllers\admin\KitchenController;
+// use App\Http\Controllers\admin\OrdersController;
+// use App\Http\Controllers\admin\TablesControllers;
+// use App\Http\Controllers\admin\UserController;
+// use App\Http\Controllers\admin\WaiterOrders;
+
+use App\Http\Controllers\Dashboard\Supervisor\StaffController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,46 +20,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     $department_name = 'login';
     $page_name = 'login';
     return view('admin.pages.users.login', compact('department_name', 'page_name'));
-});
+});*/
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     $department_name = 'dashboard';
     $page_name = 'dashboard';
-    return view('/admin/dashboard', compact('department_name', 'page_name'));
+    return view('dashboard.index', compact('department_name', 'page_name'));
 });
 
 // Admin routes 
 
 // Staff routes
-Route::get('/dashboard/staff', [StaffController::class, 'index']);
-Route::get('/dashboard/staff/add', [StaffController::class, 'create']);
-Route::post('/dashboard/staff/add', [StaffController::class, 'store'])->name('staff.store');
-Route::get('/dashboard/staff/edit/{id}', [StaffController::class, 'edit']);
-Route::put('/dashboard/staff/update/{id}', [StaffController::class, 'update'])->name('staff.update');
-Route::get('/dashboard/staff/delete/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
+Route::resource('/dashboard/staff', 'App\Http\Controllers\Dashboard\Supervisor\StaffController');
+Route::get('/dashboard/staff/tables/{id}', [StaffController::class, 'createTablesToStaff'])->name('staff.tables.create');
+Route::post('/dashboard/staff/tables/{id}', [StaffController::class, 'addTablesToStaff'])->name('staff.tables.store');
 
 // orders routes
-Route::get('/dashboard/orders', [OrdersController::class, 'index']);
-Route::get('/dashboard/orders/show/{id}', [OrdersController::class, 'show'])->name('orders.show');
+
+Route::resource('/dashboard/orders', 'App\Http\Controllers\Dashboard\Supervisor\OrdersController');
 
 // tables routes
-Route::get('/dashboard/tables', [TablesControllers::class, 'index']);
-Route::get('/dashboard/tables/add', [TablesControllers::class, 'create']);
-Route::post('/dashboard/tables/add', [TablesControllers::class, 'store'])->name('table.store');
-Route::get('/dashboard/tables/edit/{id}', [TablesControllers::class, 'edit']);
-Route::put('/dashboard/tables/update/{id}', [TablesControllers::class, 'update'])->name('table.update');
-Route::get('/dashboard/tables/delete/{id}', [TablesControllers::class, 'destroy'])->name('table.destroy');
+Route::resource('/dashboard/tables', 'App\Http\Controllers\Dashboard\Supervisor\TablesController');
 
 // category routes
-Route::resource("category", "\App\Http\Controllers\admin\CategoryController");
+Route::resource("category", "App\Http\Controllers\Dashboard\Supervisor\CategoryController");
 
 // items routes
-Route::resource("menuitem", "\App\Http\Controllers\admin\MenuItemController");
-
+Route::resource("menuitem", "App\Http\Controllers\Dashboard\Supervisor\MenuItemController");
 // user routes
 Route::resource('/users', '\App\Http\Controllers\admin\UserController');
 Route::post('users/login', [UserController::class, 'login'])->name('user.login');
