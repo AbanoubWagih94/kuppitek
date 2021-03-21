@@ -128,17 +128,17 @@
                     <p>Book your Order</p>
                 </div>
 
-                <form action="{{ route('kuppitek.store', 1) }}" method="post" data-aos="fade-up" data-aos-delay="100">
+                <form action="{{ route('kuppitek.store') }}" method="post" data-aos="fade-up" data-aos-delay="100">
                     @csrf
 
                     <div class="form-row">
                         <div class="col-lg-4 col-md-6 form-group">
-                            <input type="text" name="name" class="form-control" id="name2" placeholder="Your Name">
+                            <input type="text" name="name" class="form-control" id="name2" placeholder="Your Name" required>
                             <div class="validate"></div>
                         </div>
 
                         <div class="col-lg-4 col-md-6 form-group">
-                            <input type="text" class="form-control" name="phone" id="phone1" placeholder="Your Phone">
+                            <input type="text" class="form-control" name="phone" id="phone1" placeholder="Your Phone" required>
                             <div class="validate"></div>
                         </div>
                     </div>

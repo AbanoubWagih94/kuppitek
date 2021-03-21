@@ -61,7 +61,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout']);
 });
 
-Route::resource('kuppitek', '\App\Http\Controllers\Website\WebsiteController');
+Route::resource('/kuppitek', '\App\Http\Controllers\Website\WebsiteController');
 Route::prefix('kuppitek')->group(function () {
     Route::get('/getitem/{id}', '\App\Http\Controllers\Website\WebsiteController@getItem');
     Route::get('/addorder/{id}', '\App\Http\Controllers\WEbsite\WebsiteController@storeItem');

@@ -42,14 +42,13 @@ class WebsiteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $table_number)
+    public function store(Request $request)
     {
         $name = $request->name;
         $phone = $request->phone;
-        $table_number = $table_number;
+        $table_number = 1;
         $table = Table::where('table_number', $table_number)->first();
-        $customer = Customer::where('phone_number', $phone)->first();
-        // $table->table_status = 1;   
+        $customer = Customer::where('phone_number', $phone)->first();  
         $table->save();
         if (!$customer) {
             $customer = Customer::create([
