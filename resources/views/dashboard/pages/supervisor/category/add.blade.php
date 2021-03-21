@@ -5,7 +5,7 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">أضافة قسم جديد</h3>
+                <h3 class="content-header-title"></h3>
             </div>
         </div>
          <div class="row">
@@ -26,7 +26,7 @@
                                   <input type="text" name="name" id="name" class="form-control"  placeholder="Enter Category title">
                                 </div>
                                
-                                <div class="form-group d-flex justify-content-end">
+                                <div class="form-group d-flex">
                                 <button type="submit" class="btn btn-primary">Add</button>
                                 </div>
                               </form>

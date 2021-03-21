@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAEE,gCAF8B,CAC/B,MAAM,CACL,MAAM,CAAC;EACN,OAAO,EAAE,cAAc;CACvB;;AAJH,AAMC,gCAN+B,CAM/B,KAAK,CAAA;EACJ,SAAS,EAAE,eAAe;EAC1B,aAAa,EAAE,iBAAiB;CAChC;;AATF,AAUC,gCAV+B,CAU/B,OAAO,CAAA;EACN,SAAS,EAAE,eAAe;CAC1B",
-    "sources": [
-        "dual-listbox.scss"
-    ],
-    "names": [],
-    "file": "dual-listbox.css"
-}

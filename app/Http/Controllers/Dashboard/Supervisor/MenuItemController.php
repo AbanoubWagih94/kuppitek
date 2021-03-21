@@ -51,7 +51,7 @@ class MenuItemController extends Controller
             ]);
         session()->flash('alert_message', ['message'=>"Success", 'icon'=>'success']);        
 
-        return redirect('/menuitem');
+        return redirect('dashboard/menuitem');
     }
 
     /**
@@ -97,7 +97,7 @@ class MenuItemController extends Controller
         $menu->save();
         session()->flash('alert_message', ['message'=>"Success", 'icon'=>'success']);        
 
-        return redirect('/menuitem');
+        return redirect('dashboard/menuitem');
     }
 
     /**
@@ -111,6 +111,6 @@ class MenuItemController extends Controller
         $menu=  MenuItems::find($id);
         $menu->delete();
         session()->flash('alert_message', ['message'=>"Success", 'icon'=>'success']);        
-        return redirect('/menuitem');
+        return redirect('dashboard/menuitem');
     }
 }

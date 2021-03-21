@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAUA,AAAA,WAAW,CAAA;EACV,SAAS,EAAC,KAAK;CACf",
-    "sources": [
-        "error.scss"
-    ],
-    "names": [],
-    "file": "error.css"
-}

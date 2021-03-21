@@ -159,7 +159,7 @@ class StaffController extends Controller
         $tables = $request->tables;    
 
         if (!$tables) {
-            session()->flash('alert_message', ['message' => "something goes wrong", 'icon' => 'error']);
+            session()->flash('alert_message', ['message' => "something goes wrong please try again later!", 'icon' => 'error']);
             return redirect()->back();
         } else {
             foreach ($tables as $table) {

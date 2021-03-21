@@ -5,7 +5,7 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">تعديل بيانات طاولة رقم {{ $table->table_number }}</h3>
+                <h3 class="content-header-title"></h3>
             </div>
         </div>
          <div class="row">

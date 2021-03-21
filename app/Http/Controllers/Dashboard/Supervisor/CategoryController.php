@@ -44,7 +44,7 @@ class CategoryController extends Controller
         MenuCategories::create(['title'=>$request->name]);
         session()->flash('alert_message', ['message'=>"Succss", 'icon'=>'success']);        
 
-        return redirect('/category');
+        return redirect('dashboard/category');
     }
 
     /**
@@ -87,7 +87,7 @@ class CategoryController extends Controller
         $cat->save();
         session()->flash('alert_message', ['message'=>"Success", 'icon'=>'success']);        
 
-        return redirect('/category');
+        return redirect('dashboard/category');
     }
 
     /**
@@ -101,7 +101,7 @@ class CategoryController extends Controller
        $cat=  MenuCategories::find($id);
         $cat->delete();
         session()->flash('alert_message', ['message'=>"Success", 'icon'=>'sucess']);        
-        return redirect('/category');
+        return redirect('dashboard/category');
 
     }
 }

@@ -5,7 +5,7 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">الطاولات</h3>
+                    <h3 class="content-header-title"></h3>
                 </div>
             </div>
             <div class="row">
@@ -19,8 +19,8 @@
                         <div class="card-content">
                             <div class="table-responsive">
                                 @include('dashboard.includes.errors')
-                                <table class="table table-de mb-0">
-                                    <thead>
+                                <table class="table table-de mb-0 text-center">
+                                    <thead class="">
                                         <tr>
                                             <th></th>
                                             <th>Table Number</th>
@@ -47,14 +47,15 @@
                                                 <td>
                                                     <a href="{{ route('qrcode', $table->table_number) }}"  class="btn btn-sm round btn-outline-info" target="_blank">Generate</a>
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     <a href="{{ route('tables.edit', $table->id) }}" class="btn btn-sm round btn-outline-info">Edit</a>
+                                                    <a href="{{ route('tables.show', $table->id) }}" class="btn btn-sm round btn-outline-info">View</a>
                                                 
-                                                <form action="{{ route('tables.destroy', $table->id) }}" method="post" class="btn-group">
+                                                <form action="{{ route('tables.destroy', $table->id) }}" method="post">
                                                        @csrf
                                                        @method('delete')
                                                         <button class="btn btn-sm round btn-outline-danger" onclick="return confirm('Do you want to remove this table?!')">Remove</button>
-                                                    </form>
+                                                </form>
                                                 </td>
                                             </tr>
                                             @empty

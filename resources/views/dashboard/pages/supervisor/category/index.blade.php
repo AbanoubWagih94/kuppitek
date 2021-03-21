@@ -5,7 +5,7 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title"> اقسام kuppitek</h3>
+                <h3 class="content-header-title"></h3>
             </div>
         </div>
          <div class="row">
@@ -16,7 +16,7 @@
                     </div>
                     <div class="card-content">
                         <div class="table-responsive">
-                            <table class="table table-de mb-0">
+                            <table class="table table-de mb-0 text-center">
                             @include('dashboard.includes.errors')
                                 <thead>
                                     <tr>
@@ -32,8 +32,9 @@
                                 <td> {{$cat->title}}</td>
                                 <td>
                                             <a href="{{ route('category.edit', $cat->id) }}" class="btn btn-sm round btn-outline-info">Edit</a>
+                                            <a href="{{ route('category.show', $cat->id) }}" class="btn btn-sm round btn-outline-info">View</a>
                                         
-                                        <form action="{{ route('category.destroy', $cat->id) }}" method="post" class="btn-group">
+                                        <form action="{{ route('category.destroy', $cat->id) }}" method="post">
                                                @csrf
                                                @method('delete')
                                                 <button class="btn btn-sm round btn-outline-danger" onclick="return confirm('هل انت متاكد من حذف هذا القسم')">Remove</button>

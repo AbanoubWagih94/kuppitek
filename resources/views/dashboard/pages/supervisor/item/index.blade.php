@@ -5,20 +5,20 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title"> منيو kuppitek</h3>
+                <h3 class="content-header-title"></h3>
             </div>
         </div>
          <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('menuitem.create') }}" class="btn btn-md round btn-outline-primary float-right">Add New Item</a>
+                        <a href="{{ route('menuitem.create') }}" class="btn btn-md round btn-outline-primary">Add New Item</a>
                         
                     </div>
                     <div class="card-content">
                         <div class="table-responsive">
                           
-                            <table class="table table-de mb-0">
+                            <table class="table table-de mb-0 text-center">
                             @include('dashboard.includes.errors')
 
                                 <thead>
@@ -41,8 +41,9 @@
                                 <td> {{$menu->cost}}</td>
                                 <td>
                                             <a href="{{ route('menuitem.edit', $menu->id) }}" class="btn btn-sm round btn-outline-info">Edit</a>
+                                            <a href="{{ route('menuitem.show', $menu->id) }}" class="btn btn-sm round btn-outline-info">View</a>
                                         
-                                        <form action="{{ route('menuitem.destroy', $menu->id) }}" method="post" class="btn-group">
+                                        <form action="{{ route('menuitem.destroy', $menu->id) }}" method="post" >
                                                @csrf
                                                @method('delete')
                                                 <button class="btn btn-sm round btn-outline-danger" onclick="return confirm('Do you want to remove this item?!')">Remove</button>
