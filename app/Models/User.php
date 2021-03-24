@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $fillable = ['role_id', 'user_name', 'name', 'password'];
+    protected $fillable = ['role_id', 'email', 'name', 'password', 'country_id', 'mobile_number', 'image_path'];
     protected $hidden = ['password'];
 
     public function userRole() {
@@ -19,5 +19,7 @@ class User extends Authenticatable
 
     public function tables() {
         return $this->belongsToMany(Table::class, 'user_tables', 'user_id', 'table_id');
-        }
+    }
+    
+
 }

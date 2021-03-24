@@ -14,7 +14,7 @@ class CreateTablesTable extends Migration
     public function up()
     {
         Schema::create('tables', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->unsignedInteger('table_number')->unique();
             $table->boolean("table_status")->default(false);
             $table->timestamps();

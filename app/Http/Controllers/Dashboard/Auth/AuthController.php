@@ -9,24 +9,35 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $request->validate([
-            'user_name'=> 'required',
-            'password'=> 'required'
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
 
-        $user = User::where('user_name', $request->user_name)->first();
-        if(!($user && Hash::check($request->password, $user->password))){
-            session()->flash('alert_message', ['message'=>"Incorrect user name or password", 'icon'=>'error']);
+        $user = User::where('email', $request->email)->first();
+        if (!($user && Hash::check($request->password, $user->password))) {
+            session()->flash('alert_message', ['message' => "Incorrect user name or password", 'icon' => 'error']);
             return redirect()->back();
         }
-        session(['userLogin'=> $user]); 
-        return redirect('/dashboard');
+        session(['userLogin' => $user]);
+        if($user->role_id == 2){
+            //
+        } else if ($user->role_id == 3) {
+            return redirect('/dashboard/waiter');
+        } else if ($user->role_id == 4) {
+            return redirect('/dashboard/kitchen');
+        } else {
+            return redirect('/dashboard');
+        }
+
     }
 
-    public function logout(){
-        session()->forget('userLogin'); 
-        session()->flash('sweet_alert.alert', ['message'=>"Success", 'icon'=>'success']);
+    public function logout()
+    {
+        session()->forget('userLogin');
+        session()->flash('sweet_alert.alert', ['message' => "Success", 'icon' => 'success']);
         return redirect('/dashboard/login');
     }
 }

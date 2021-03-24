@@ -71,7 +71,8 @@ class TablesController extends Controller
      */
     public function show($id)
     {
-        //
+        $table = Table::find($id);
+        return view('dashboard.pages.supervisor.tables.show', ['table' => $table]);
     }
 
     /**

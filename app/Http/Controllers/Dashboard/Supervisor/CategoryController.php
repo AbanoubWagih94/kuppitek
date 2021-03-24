@@ -5,6 +5,8 @@ use App\Models\MenuCategories;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use  App\Http\Requests\CategoryRequest;
+use App\Models\MenuItems;
+
 class CategoryController extends Controller
 {
     /**
@@ -55,7 +57,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = MenuCategories::find($id);
+        return view('dashboard.pages.supervisor.category.show', ['category'=> $category]);
     }
 
     /**
@@ -100,7 +103,7 @@ class CategoryController extends Controller
     {
        $cat=  MenuCategories::find($id);
         $cat->delete();
-        session()->flash('alert_message', ['message'=>"Success", 'icon'=>'sucess']);        
+        session()->flash('alert_message', ['message'=>"Success", 'icon'=>'success']);        
         return redirect('dashboard/category');
 
     }

@@ -11,8 +11,8 @@
          <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">New category</h4>
+                    <div class="card-header mb-3">
+                        <h4 class="card-title">Add New Category</h4>
                     </div>
                     <div class="card-content">
                   

@@ -143,12 +143,10 @@ class WebsiteController extends Controller
     }
 
 
-    public function storeItem(Request $request, $id)
+    public function storeItem($id)
     {
         $MenuItems = MenuItems::findOrFail($id);
         $cart =  Cart::add($id, $MenuItems->title, 1, $MenuItems->cost);
-
-
         $html_cart = '';
         $total = Cart::subtotal();
         foreach (Cart::content()  as $cart) {
@@ -212,10 +210,6 @@ class WebsiteController extends Controller
 
     public function deleteItem($id)
     {
-
-        // dd($id);
-        //    $a= Cart::get($id);
-        // dd($a);
         Cart::remove($id);
 
         $html_cart = '';

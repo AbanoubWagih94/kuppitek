@@ -45,8 +45,12 @@ Route::prefix('dashboard')->group(function () {
         // category routes
         Route::resource("/category", "App\Http\Controllers\Dashboard\Supervisor\CategoryController");
 
-        // items routes
-        Route::resource("/menuitem", "App\Http\Controllers\Dashboard\Supervisor\MenuItemController");
+        // products routes
+        Route::resource("/products", "App\Http\Controllers\Dashboard\Supervisor\ProductsController");
+        
+        
+        // tax routes 
+        Route::resource("/tax", "App\Http\Controllers\Dashboard\Supervisor\TaxController");
         // waiter page
         Route::resource('/waiter', '\App\Http\Controllers\Dashboard\Waiter\WaiterController');
         Route::get('/waiter/add/{order_id}', [WaiterController::class, 'addToKitchen'])->name('waiter.add');
@@ -64,7 +68,7 @@ Route::prefix('dashboard')->group(function () {
 Route::resource('/kuppitek', '\App\Http\Controllers\Website\WebsiteController');
 Route::prefix('kuppitek')->group(function () {
     Route::get('/getitem/{id}', '\App\Http\Controllers\Website\WebsiteController@getItem');
-    Route::get('/addorder/{id}', '\App\Http\Controllers\WEbsite\WebsiteController@storeItem');
+    Route::get('/addorder/{id}', '\App\Http\Controllers\Website\WebsiteController@storeItem');
     Route::get('/updatecart/{id}/{qty}', '\App\Http\Controllers\Website\WebsiteController@updateCart');
     Route::get('/deleteitem/{id}', '\App\Http\Controllers\Website\WebsiteController@deleteItem');
 });

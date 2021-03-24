@@ -15,7 +15,7 @@ class Table extends Model
     public function users() {
         return $this->belongsToMany(User::class, 'user_tables', 'table_id', 'user_id');
     }
-    public function orderss() {
+    public function orders() {
         return $this->hasMany(Order::class,);
     }
 }

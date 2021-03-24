@@ -1,7 +1,5 @@
 @extends('dashboard.layouts.app')
-@section('dashboard.content')
-
-    
+@section('dashboard.content')    
                         <div class="">
                             <div class="">
                                 <div class="btn-group">
@@ -23,11 +21,11 @@
                             </div>
                             <div class="">
                                 <div class="btn-group">
-                                    <button class="btn3" title="Suppliers"><a href="#"><i class="fas fa-dolly fa-2x"></i></a><span>Suppliers</span></button>
                                     <button class="btn3" title="Branches"><a href="#"><i class="fas fa-store-alt fa-2x"></i></a><span>Branches</span></button>
-                                    <button class="btn3" title="Products"><a href="#"><i class="fas fa-box-open fa-2x"></i></a><span>Products</span></button>
+                                    <button class="btn3" title="Suppliers"><a href="#"><i class="fas fa-dolly fa-2x"></i></a><span>Suppliers</span></button>
+                                    <button class="btn3" title="Products"><a href="{{  route('products.index') }}"><i class="fas fa-box-open fa-2x"></i></a><span>Products</span></button>
                                     <button class="btn3" title="Categories"><a href="{{ route('category.index') }}"><i class="fas fa-sitemap fa-2x"></i></a><span>Categories</span></button>
-                                    <button class="btn3" title="Taxes"><a href="#"><i class="fas fa-percent fa-2x"></i></a><span>Taxes</span></button>
+                                    <button class="btn3" title="Taxes"><a href="{{ route('tax.index') }}"><i class="fas fa-percent fa-2x"></i></a><span>Taxes</span></button>
                                 </div>
                             </div>
                             <div class="">
@@ -36,7 +34,7 @@
                                     <button class="btn4" title="Tables"><a href="{{ route('tables.index') }}"><i class="fas fa-microchip fa-2x"></i></a><span>Tables</span></button>
                                     <button class="btn4" title="Kitchen"><a href="{{ route('kitchen.index') }}"><i class="fas fa-utensils fa-2x"></i></a><span>Kitchen</span></button>
                                     <button class="btn4" title="Waiter"><a href="{{ route('waiter.index') }}"><i class="fas fa-user-tie fa-2x"></i></a><span>Waiter</span></button>
-                                    <button class="btn4" title="Menu"><a href="{{ route('menuitem.index') }}"><i class="fas fa-clipboard-list fa-2x"></i></a><span>Menu</span></button>
+                                    <button class="btn4" title="Menu"><a href=""><i class="fas fa-clipboard-list fa-2x"></i></a><span>Menu</span></button>
                                 </div>  
                             </div>
                         </div>

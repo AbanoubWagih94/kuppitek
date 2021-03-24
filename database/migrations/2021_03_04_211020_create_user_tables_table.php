@@ -14,9 +14,9 @@ class CreateUserTablesTable extends Migration
     public function up()
     {
         Schema::create('user_tables', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('table_id');
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('table_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade');
             $table->timestamps();

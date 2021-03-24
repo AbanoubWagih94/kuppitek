@@ -30,7 +30,7 @@ class CategoryRequest extends FormRequest
 
     public function messages(){
     return [
-        'name.required'=> 'اسم القسم مطلوب',
+        'name.required'=> 'Category name is required',
     ];
     }
 }

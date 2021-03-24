@@ -14,8 +14,10 @@ class CreateMenuCategoriesTable extends Migration
     public function up()
     {
         Schema::create('menu_categories', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->text('title', 150);
+            $table->boolean('discount')->default(false);
+            $table->integer('discount_value')->default(0);
             $table->timestamps();
         });
     }

@@ -5,13 +5,13 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">أضافة موظف جديد</h3>
+                <h3 class="content-header-title"></h3>
             </div>
         </div>
          <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header mb-3">
                         <h4 class="card-title">Add Tables To <b>{{ $user->name }}</b></h4>
                     </div>
                     <div class="card-content">

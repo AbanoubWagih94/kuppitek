@@ -11,7 +11,8 @@
          <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header mb-3">
+                        <h3 class="card-title">Add New Table</h3>
                     </div>
                     <div class="card-content">
                         @include('dashboard.includes.errors')
@@ -19,8 +20,8 @@
                             <form action="{{ Route('tables.store') }}" method="POST">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                  <label for="tableNumber">Table_number</label>
-                                  <input type="text" name="table_number" id="tableNumber" class="form-control"  placeholder="4">
+                                  <label for="tableNumber">Table Number</label>
+                                  <input type="text" name="table_number" id="tableNumber" class="form-control"  placeholder="Enter table number">
                                 </div>
                                 <div class="form-group d-flex">
                                 <button type="submit" class="btn btn-primary">Add</button>

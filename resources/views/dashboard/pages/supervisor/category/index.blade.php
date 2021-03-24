@@ -20,28 +20,31 @@
                             @include('dashboard.includes.errors')
                                 <thead>
                                     <tr>
-                                        <th></th>
+                                        <th>#</th>
                                         <th>Title</th>
                                         <th>Control</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($MenuCategories as $cat)
+                                    @forelse($MenuCategories as $cat)
                                 <tr>
                                 <td>{{$cat->id}} </td>
                                 <td> {{$cat->title}}</td>
                                 <td>
-                                            <a href="{{ route('category.edit', $cat->id) }}" class="btn btn-sm round btn-outline-info">Edit</a>
-                                            <a href="{{ route('category.show', $cat->id) }}" class="btn btn-sm round btn-outline-info">View</a>
-                                        
-                                        <form action="{{ route('category.destroy', $cat->id) }}" method="post">
-                                               @csrf
-                                               @method('delete')
-                                                <button class="btn btn-sm round btn-outline-danger" onclick="return confirm('هل انت متاكد من حذف هذا القسم')">Remove</button>
-                                            </form>
-                                        </td>
+                                    <a href="{{ route('category.show', $cat->id) }}" class="btn btn-sm round btn-warning"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('category.edit', $cat->id) }}" class="btn btn-sm round btn-info"><i class="fas fa-edit"></i></a>
+                                <form action="{{ route('category.destroy', $cat->id) }}" method="post">
+                                       @csrf
+                                       @method('delete')
+                                        <button class="btn btn-sm round btn-danger" onclick="return confirm('Do you want to remove this category?!')"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
                                         </tr>
-                                    @endforeach
+                                        @empty
+                                        <tr>
+                                            <td colspan="3">No Categories Found</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

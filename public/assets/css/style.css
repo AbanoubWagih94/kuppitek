@@ -139,3 +139,16 @@ nav ul li a{
 span {
     display: block;
   }
+
+  /** Tables style**/ 
+
+  table {
+      text-align: center;
+  }
+  tr td form {
+      display: inline-block;
+  }
+
+  tr td a  {
+      margin-right: 15px;
+  }

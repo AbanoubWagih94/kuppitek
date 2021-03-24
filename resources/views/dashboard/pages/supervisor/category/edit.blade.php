@@ -11,7 +11,7 @@
          <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header mb-3">
                         <h4 class="card-title"> Edit Category </h4>
                     </div>
                     <div class="card-content">
@@ -29,7 +29,7 @@
 
                                 <div class="form-group">
                                   <label for="name">Category Title</label>
-                                  <input type="text" name="name" id="name" class="form-control"  placeholder=" اكتب اسم القسم" value="{{$cat->title}}" >
+                                  <input type="text" name="name" id="name" class="form-control"  placeholder="Enter Category Title" value="{{$cat->title}}" >
                                 </div>
                                
                                 <div class="form-group d-flex">

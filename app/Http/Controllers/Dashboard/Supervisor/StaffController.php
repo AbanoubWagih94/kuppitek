@@ -22,7 +22,7 @@ class StaffController extends Controller
         $page_name = "staff";
         $department_name = "staff";
         $users = User::all();
-        return view('dashboard.pages.supervisor.staff.index', ['users'=> $users, 'page_name' => $page_name, 'department_name' => $department_name]);
+        return view('dashboard.pages.supervisor.staff.index', ['users' => $users, 'page_name' => $page_name, 'department_name' => $department_name]);
     }
 
     /**
@@ -32,11 +32,9 @@ class StaffController extends Controller
      */
     public function create()
     {
-        $page_name = "add";
-        $department_name = "add_staff";
         $roles = Role::all();
         $tables = Table::all();
-        return view('dashboard.pages.supervisor.staff.add', ['roles'=> $roles, 'tables'=> $tables, 'page_name' => $page_name, 'department_name' => $department_name]);
+        return view('dashboard.pages.supervisor.staff.add', ['roles' => $roles, 'tables' => $tables]);
     }
 
     /**
@@ -49,23 +47,32 @@ class StaffController extends Controller
     {
         $password = Hash::make("123456");
         $request->validate([
-            'user_name'=>'required|max:150|unique:users',
-            'name'=>'required|max:150',
-            'role_id'=>'required',
+            'email' => 'required|max:150|unique:users',
+            'name' => 'required|max:150',
+            'role_id' => 'required',
+            'country_id' => 'required',
+            'phone_number' => 'required',
         ]);
-
+        $image = "";
+        if ($request->hasFile('image')) {
+            $image = time() . $request->image->getClientOriginalName() . '.' . $request->image->extension();
+            $request->image->move(public_path('assets/uploads/images/staff'), $image);
+        }
         $user = User::create([
             'role_id' => $request->role_id,
-            'user_name'=> $request->user_name,
-            'name'=> $request->name,
-            'password' => $password
+            'email' => $request->email,
+            'name' => $request->name,
+            'password' => $password,
+            'country_id' => $request->country_id,
+            'mobile_number' => $request->phone_number,
+            'image_path' => $image
         ]);
 
         if (!$user) {
-            session()->flash('alert_message', ['message'=>"something goes wrong", 'icon'=>'error']);
+            session()->flash('alert_message', ['message' => "something goes wrong please try again later!", 'icon' => 'error']);
             return redirect()->back();
         }
-        session()->flash('alert_message', ['message'=>"success", 'icon'=>'success']);
+        session()->flash('alert_message', ['message' => "New member added", 'icon' => 'success']);
         return redirect('/dashboard/staff');
     }
 
@@ -77,10 +84,8 @@ class StaffController extends Controller
      */
     public function show($id)
     {
-        $page_name = "show";
-        $department_name = "show_staff";
         $user = User::find($id);
-        return view('dashboard.pages.supervisor.staff.show', ['user'=> $user, 'page_name'=> $page_name, 'department_name'=> $department_name]);
+        return view('dashboard.pages.supervisor.staff.show', ['user' => $user]);
     }
 
     /**
@@ -90,12 +95,10 @@ class StaffController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
-        $page_name = "edit";
-        $department_name = "edit_staff";
+    {
         $roles = Role::all();
         $user = User::find($id);
-        return view('dashboard.pages.supervisor.staff.edit', ['user'=> $user, 'roles'=> $roles,  'page_name'=> $page_name, 'department_name'=> $department_name]);
+        return view('dashboard.pages.supervisor.staff.edit', ['user' => $user, 'roles' => $roles,]);
     }
 
     /**
@@ -108,21 +111,37 @@ class StaffController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name'=>'required|max:150',
-            'role_id'=>'required',
+            'name' => 'required|max:150',
+            'role_id' => 'required',
+            'country_id' => 'required',
+            'phone_number' => 'required',
         ]);
-        $user = User::find($id);    
+        $user = User::find($id);
+
+
+        $image = $user->image_path;
+        if ($request->hasFile('image')) {
+            if ($image!="" && file_exists(public_path(('assets/uploads/images/staff/' . $image)))) {
+                unlink(public_path(('assets/uploads/images/staff/'.$image)));
+            }
+            $image = time() . $request->image->getClientOriginalName() . '.' . $request->image->extension();
+            $request->image->move(public_path('assets/uploads/images/staff'), $image);
+        }
+
         $user = $user->update([
             'role_id' => $request->role_id,
-            'name'=> $request->name,
+            'name' => $request->name,
+            'country_id' => $request->country_id,
+            'mobile_number' => $request->phone_number,
+            'image_path' => $image
         ]);
 
         if (!$user) {
-            session()->flash('alert_message', ['message'=>"something goes wrong", 'icon'=>'error']);
-                
+            session()->flash('alert_message', ['message' => "Something goes wrong please try again later!", 'icon' => 'error']);
+
             return redirect()->back();
         }
-        session()->flash('alert_message', ['message'=>"success", 'icon'=>'success']);
+        session()->flash('alert_message', ['message' => "Member information updated", 'icon' => 'success']);
         return redirect('/dashboard/staff');
     }
 
@@ -135,28 +154,30 @@ class StaffController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        if($user) {
+        if ($user) {
             $user->delete();
-            session()->flash('alert_message', ['message'=>"Success", 'icon'=>'success']);
+            session()->flash('alert_message', ['message' => "Success", 'icon' => 'success']);
         } else {
             session()->put('error', 'Something goes wrong please try again later');
         }
         return redirect('/dashboard/staff');
     }
 
-    public function createTablesToStaff($id){
+    public function createTablesToStaff($id)
+    {
         $page_name = "edit";
         $department_name = "edit_staff";
         $user = User::findOrFail($id);
         $tables = Table::all();
-        return view('dashboard.pages.supervisor.staff.add_tables', ['user'=> $user,'tables'=> $tables,  'page_name'=> $page_name, 'department_name'=> $department_name]);
+        return view('dashboard.pages.supervisor.staff.add_tables', ['user' => $user, 'tables' => $tables,  'page_name' => $page_name, 'department_name' => $department_name]);
     }
 
-    public function addTablesToStaff(Request $request, $user_id){
+    public function addTablesToStaff(Request $request, $user_id)
+    {
         $request->validate([
             'tables' => 'required',
         ]);
-        $tables = $request->tables;    
+        $tables = $request->tables;
 
         if (!$tables) {
             session()->flash('alert_message', ['message' => "something goes wrong please try again later!", 'icon' => 'error']);
@@ -170,7 +191,7 @@ class StaffController extends Controller
             }
             session()->flash('alert_message', ['message' => "success", 'icon' => 'success']);
         }
-        
+
 
         return redirect('/dashboard/tables');
     }

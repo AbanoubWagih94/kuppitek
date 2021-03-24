@@ -11,8 +11,8 @@
                     <form action="{{ route('dashboard.login') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
-                          <label for="userName">User name</label>
-                          <input type="text" class="form-control" name="user_name" id="userName"  placeholder="Enter user name" required>
+                          <label for="email">Email</label>
+                          <input type="email" class="form-control" name="email" id="email"  placeholder="Enter user email" required>
                         </div>
                         <div class="form-group">
                           <label for="passwrod">Password</label>
