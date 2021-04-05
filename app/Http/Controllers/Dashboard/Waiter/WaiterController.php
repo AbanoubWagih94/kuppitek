@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard\Waiter;
 
 use App\Http\Controllers\Controller;
+use App\Models\Counter;
+use App\Models\CounterUsers;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -110,8 +112,25 @@ class WaiterController extends Controller
         $order = Order::find($order_id);
         $order->order_status = 2;
         $order->save(); 
-        session()->flash('alert_message', ['message'=>"Success", 'icon'=>'success']);
+        session()->flash('alert_message', ['message'=>"Order added to kitchen", 'icon'=>'success']);
         return redirect()->back(); 
+    }
+
+    public function showAddToCashier($order_id) {
+        $cashiers = User::where('role_id', '2')->get(); 
+        return view('dashboard.pages.waiter.add_to_cashier', ['cashiers'=> $cashiers, 'order_id' => $order_id]); 
+    }
+    public function addToCashier(Request $request, $order_id) {
+        $order = Order::find($order_id);
+        $cashier = $request->cashier;
+        $counter = CounterUsers::where([
+            ['user_id', $cashier],
+            ['start_money', '!=', null]
+        ])->first();
+        $order->counter_id = $counter->counter_id;
+        $order->save(); 
+        session()->flash('alert_message', ['message'=>"Order added to Cashier", 'icon'=>'success']);
+        return redirect('dashboard/orders/'. $order_id); 
     }
     public function addToTable($order_id) {
         

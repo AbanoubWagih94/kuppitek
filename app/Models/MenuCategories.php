@@ -10,9 +10,15 @@ class MenuCategories extends Model
     use HasFactory;
 
 
-    protected $guarded=[];
+    protected $guarded = [];
 
-    public function products(){
+    public function products()
+    {
         return $this->hasMany(Product::class, 'category_id');
-       }
+    }
+    
+    public function subCategories()
+    {
+        return $this->hasMany(SubCategory::class, 'category_id');
+    }
 }

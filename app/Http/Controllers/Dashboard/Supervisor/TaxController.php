@@ -15,8 +15,8 @@ class TaxController extends Controller
      */
     public function index()
     {
-        $taxs  = Tax::all();
-        return view('dashboard.pages.supervisor.tax.index', ['taxs'=> $taxs]);
+        $taxes  = Tax::all();
+        return view('dashboard.pages.supervisor.tax.index', ['taxes'=> $taxes]);
     }
 
     /**

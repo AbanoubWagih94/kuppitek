@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard\Supervisor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Counter;
+use App\Models\CounterUsers;
 use App\Models\Role;
 use App\Models\Table;
 use App\Models\User;
@@ -52,10 +54,11 @@ class StaffController extends Controller
             'role_id' => 'required',
             'country_id' => 'required',
             'phone_number' => 'required',
+            'image'=> 'required'
         ]);
         $image = "";
         if ($request->hasFile('image')) {
-            $image = time() . $request->image->getClientOriginalName() . '.' . $request->image->extension();
+            $image = time() . $request->image->getClientOriginalName();
             $request->image->move(public_path('assets/uploads/images/staff'), $image);
         }
         $user = User::create([
@@ -124,7 +127,7 @@ class StaffController extends Controller
             if ($image!="" && file_exists(public_path(('assets/uploads/images/staff/' . $image)))) {
                 unlink(public_path(('assets/uploads/images/staff/'.$image)));
             }
-            $image = time() . $request->image->getClientOriginalName() . '.' . $request->image->extension();
+            $image = time() . $request->image->getClientOriginalName();
             $request->image->move(public_path('assets/uploads/images/staff'), $image);
         }
 
@@ -165,11 +168,9 @@ class StaffController extends Controller
 
     public function createTablesToStaff($id)
     {
-        $page_name = "edit";
-        $department_name = "edit_staff";
         $user = User::findOrFail($id);
         $tables = Table::all();
-        return view('dashboard.pages.supervisor.staff.add_tables', ['user' => $user, 'tables' => $tables,  'page_name' => $page_name, 'department_name' => $department_name]);
+        return view('dashboard.pages.supervisor.staff.add_tables', ['user' => $user, 'tables' => $tables]);
     }
 
     public function addTablesToStaff(Request $request, $user_id)
@@ -194,5 +195,36 @@ class StaffController extends Controller
 
 
         return redirect('/dashboard/tables');
+    }
+    public function createCounterToStaff($id)
+    {
+        $user = User::findOrFail($id);
+        $counters = Counter::all();
+        return view('dashboard.pages.supervisor.staff.add_counter', ['user' => $user, 'counters' => $counters]);
+    }
+
+    public function addCounterToStaff(Request $request, $user_id)
+    {
+        $request->validate([
+            'counter_id' => 'required',
+        ]);
+        $counter = $request->counter_id;
+
+        if (!$counter) {
+            session()->flash('alert_message', ['message' => "something goes wrong please try again later!", 'icon' => 'error']);
+            return redirect()->back();
+        } else {
+            
+                CounterUsers::create([
+                    'counter_id'=> $request->counter_id,
+                    'user_id'=> $user_id,
+                    'start_money'=> " "
+                ]);
+            
+            session()->flash('alert_message', ['message' => "success", 'icon' => 'success']);
+        }
+
+
+        return redirect('/dashboard/counter');
     }
 }

@@ -23,7 +23,7 @@ class AuthController extends Controller
         }
         session(['userLogin' => $user]);
         if($user->role_id == 2){
-            //
+            return redirect('/dashboard/cashier');
         } else if ($user->role_id == 3) {
             return redirect('/dashboard/waiter');
         } else if ($user->role_id == 4) {

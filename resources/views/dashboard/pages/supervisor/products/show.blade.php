@@ -19,6 +19,9 @@
                                     <tr>
                                         <th>Title</th>
                                         <th>Category</th>
+                                        @if($product->sub_category_id  != null)
+                                        <th>ِSub Category</th>
+                                        @endif
                                         <th>Quantity</th>
                                         <th>Cost Price</th>
                                         <th>Selling Price</th>
@@ -30,6 +33,9 @@
                                     <tr>
                                         <td>ِ{{ $product->title }}</td>
                                         <td>ِ{{ $product->category->title }}</td>
+                                        @if($product->sub_category_id  != null)
+                                        <td>ِ{{ $product->subCategory->title }}</td>
+                                        @endif
                                         <td>{{ $product->quantity }}</td>   
                                         <td>ِ{{ $product->cost_price }}</td>
                                         <td>ِ{{ $product->selling_price }}</td>

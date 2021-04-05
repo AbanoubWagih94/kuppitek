@@ -16,18 +16,18 @@
                             <table class="table table-de mb-0">
                                 <thead>
                                     <tr>
-                                        <th></th>
+                                        <th>#</th>
                                         <th>Table Number</th>
                                         <th>Table Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($orders as $key => $order)
+                                    @forelse($orders as $key => $order)
                                     
                                     @if($order->order_status < 5)
                                     <tr>
-                                        <td>{{ $key +1 }}</td>
+                                        <td>{{ $order->id }}</td>
                                         <td>ِ{{ $order->table->table_number }}</td>
                                         @if( $order->order_status == 1)
                                             <td>Order Not Served</td>
@@ -39,19 +39,20 @@
                                         <td>Order On Table Now</td>    
                                         @endif
                                         <td>
-                                            <a href="" class="btn btn-sm round btn-outline-info">Edit</a>
-                                            <a href="" class="btn btn-sm round btn-outline-info">View</a>
-                                            
-                                        <form action="" method="post">
+                                            <a href="{{ route('orders.show', $order->id) }}" class="btn btn-sm round btn-warning"><i class="fas fa-eye"></i></a>
+                                            <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-sm round btn-info"><i class="fas fa-edit"></i></a>
+                                        <form action="{{ route('orders.destroy', $order->id) }}" method="post">
                                                @csrf
                                                @method('delete')
-                                                <button class="btn btn-sm round btn-outline-danger" onclick="return confirm('Do you want to remove this category?!')">Remove</button>
+                                                <button class="btn btn-sm round btn-danger" onclick="return confirm('Do you want to remove this order?!')"><i class="fas fa-trash-alt"></i></button>
                                             </form>
                                         </td>
                                         
                                     </tr> 
                                     @endif
-                                    @endforeach
+                                    @empty
+                                        <td colspan="3">No Orders Found</td>
+                                    @endforelse
                                     
                                 </tbody>
                             </table>

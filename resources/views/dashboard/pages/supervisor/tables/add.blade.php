@@ -21,7 +21,11 @@
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                   <label for="tableNumber">Table Number</label>
-                                  <input type="text" name="table_number" id="tableNumber" class="form-control"  placeholder="Enter table number">
+                                  <input type="number" name="table_number" id="tableNumber" class="form-control"  placeholder="Enter table number">
+                                </div>
+                                <div class="form-group">
+                                  <label for="tableNumber">Table seats Number</label>
+                                  <input type="number" name="table_seats_number" id="tableNumber" class="form-control"  placeholder="Enter table number">
                                 </div>
                                 <div class="form-group d-flex">
                                 <button type="submit" class="btn btn-primary">Add</button>

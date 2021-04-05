@@ -24,7 +24,11 @@
                                 @method('PUT')
                                 <div class="form-group">
                                     <label for="tableNumber">Table Number</label>
-                                    <input type="text" name="table_number" value="{{ $table->table_number }}" id="tableNumber" class="form-control"  placeholder="4" disabled>
+                                    <input type="text" name="table_number" value="{{ $table->table_number }}" id="tableNumber" class="form-control"  placeholder="Enter table number" disabled>
+                                  </div>
+                                <div class="form-group">
+                                    <label for="tableNumber">Table Seats Number</label>
+                                    <input type="number" name="table_seats_number" value="{{ $table->table_seats_number}}" id="tableNumber" class="form-control"  placeholder="Enter number of table's seats">
                                   </div>
                                 <div class="form-group d-flex">
                                 <button type="submit" class="btn btn-primary">Update</button>

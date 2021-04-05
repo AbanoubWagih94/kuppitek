@@ -2,6 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="refresh" content="60" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Modern admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities with bitcoin dashboard.">
     <meta name="keywords" content="admin template, modern admin template, dashboard template, flat admin template, responsive admin template, web app, crypto dashboard, bitcoin dashboard">
@@ -23,15 +24,13 @@
   <link href="{{asset('website/assets/vendor/aos/aos.css')}}" rel="stylesheet">
   <!-- End Vendor CSS Files -->
 
-   <!-- Scripts -->
-   <script src="{{ asset('js/app.js') }}" defer></script>
+   
 
    <!-- Fonts -->
    <link rel="dns-prefetch" href="//fonts.gstatic.com">
    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-   <!-- Styles -->
-   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
    <!-- Template Main CSS File -->
   <link href="{{asset('website/assets/css/style.css')}}" rel="stylesheet">
 </head>

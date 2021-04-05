@@ -8,7 +8,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
+                        @if($taxes->count() <1)
                         <a href="{{ route('tax.create') }}" class="btn btn-md round btn-outline-primary">Add New Tax</a>
+                        @endif
                         
                     </div>
                     <div class="card-content">
@@ -24,7 +26,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($taxs as $key => $tax)
+                                    @forelse($taxes as $key => $tax)
                                     <tr>
                                         <td>{{ $tax->id }}</td>
                                         <td>ِ{{ $tax->tax_percentage }}</td>

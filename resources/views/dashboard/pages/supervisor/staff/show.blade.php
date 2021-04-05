@@ -12,6 +12,8 @@
                     <div class="card-header">
                         @if($user->role_id == 3) 
                         <a href="{{ route('staff.tables.create', $user->id) }}" class="btn btn-md round btn-outline-primary">Add Tables</a>
+                        @elseif ($user->role_id == 2)
+                        <a href="{{ route('staff.counter.create', $user->id) }}" class="btn btn-md round btn-outline-primary">Add Counter</a>
                         @endif
                         
                     </div>

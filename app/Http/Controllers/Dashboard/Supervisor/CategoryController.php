@@ -16,10 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $page_name = "category";
-        $department_name = "category";
         $MenuCategories = MenuCategories::paginate(10);
-        return view("dashboard.pages.supervisor.category.index", ['MenuCategories'=> $MenuCategories, 'page_name' => $page_name, 'department_name' => $department_name]);
+        return view("dashboard.pages.supervisor.category.index", ['MenuCategories'=> $MenuCategories]);
     }
 
     /**
@@ -29,9 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $page_name = "category";
-        $department_name = "category";
-        return view("dashboard.pages.supervisor.category.add",  ['page_name' => $page_name, 'department_name' => $department_name]);
+        return view("dashboard.pages.supervisor.category.add");
     
     }
 
@@ -70,9 +66,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
        $cat=  MenuCategories::find($id);
-       $page_name = "category";
-        $department_name = "category";
-        return view("dashboard.pages.supervisor.category.edit",  [ 'cat'=>$cat , 'page_name' => $page_name, 'department_name' => $department_name]);
+       return view("dashboard.pages.supervisor.category.edit",  [ 'cat'=>$cat]);
         
     }
 
@@ -99,9 +93,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-       $cat=  MenuCategories::find($id);
+        $cat=  MenuCategories::find($id);
         $cat->delete();
         session()->flash('alert_message', ['message'=>"Success", 'icon'=>'success']);        
         return redirect('dashboard/category');

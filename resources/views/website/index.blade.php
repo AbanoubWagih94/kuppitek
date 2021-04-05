@@ -3,174 +3,122 @@
     <main id="main">
 
         <!-- ======= Header ======= -->
+        <div class="title">
+            <img src="{{ asset('assets/images/Kuppitek-Logo-xsmall-TR.png') }}" />
+        </div>
+
+        <div class="ads text-center">ADS</div>
 
 
-        <section id="menu" class="menu section-bg">
-            <div class="container" data-aos="fade-up">
+        <ul class="navbar text-center">
+            <div class="container">
+                <div class="row">
+                    @forelse ($categories as $category)
+                        <li><a href="#"
+                                onclick="getitems({{ $category->id }}, {{ $category->subCategories }}, 'category')" >{{ $category->title }}
+                            </a>
+                        </li>
 
-                <div class="section-title">
-                    <h2>Menu</h2>
-                    <p>Categories</p>
+                    @empty
+                        No Categories Found
+                    @endforelse
                 </div>
-
-                <div class="row" data-aos="fade-up" data-aos-delay="100">
-                    <div class="col-lg-12 d-flex justify-content-center">
-
-                        <ul id="menu-flters">
-                            @foreach ($categories as $cat)
-                                <li data-filter="*" class="filter-active"><a
-                                        onclick="getitems({{ $cat->id }})">{{ $cat->title }} </a></li>
-                            @endforeach
-
-                    </div>
-                </div>
-
-                <div class="row " style="height: !important" id="data" data-aos="fade-up" data-aos-delay="200">
-
-
-                </div>
-
             </div>
-        </section><!-- End Menu Section -->
-        <!-- ======= Why Us Section ======= -->
-        <section id="why-us" class="why-us">
-            <div class="container" data-aos="fade-up">
+        </ul>
 
-                <div class="section-title">
-                    <h2> Menu</h2>
-                    <p>Items</p>
+        <div class="mt-3" id="subCategories_html">
+        </div>
+
+        <div class="products mb-3">
+            <div class="container-fluid">
+                <div class="row" id="items_html">
                 </div>
-
-                <div class="row" id="data_html">
-
-
-
-                </div>
-
             </div>
-        </section>
+        </div>
 
-        <section id="specials" class="specials">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-title">
-                    <h2>POS</h2>
-                    <p> Your Order</p>
-                </div>
-
-                <div class="row" data-aos="fade-up" data-aos-delay="100">
-                    <table class="table " style="color: aliceblue; text-algin:center ">
-                        <thead>
-                            <tr>
-                                <th scope="col">product</th>
-                                <th scope="col">price</th>
-                                <th scope="col">qty</th>
-                                <th scope="col"> control</th>
-                            </tr>
-                        </thead>
-                        <tbody id="carttable2">
-                            @foreach (Cart::content() as $cart)
+        @if ($table != null)
+            <div class="orders">
+                <h3 class="">
+                    <div class="container-fluid">Table Number: {{ $table->table_number }}</div>
+                </h3>
+                <div class="container-fluid">
+                    <div class="row">
+                        <table class="table">
+                            <thead class="text-center">
                                 <tr>
-
-                                    <td>{{ $cart->name }}</td>
-                                    <td>{{ $cart->price }}</td>
-                                    <td>
-
-                                        <div class="quantity buttons_added">
-                                            <input type="button" value="-" class="minus"
-                                                onclick="minus({{ $cart->id }})">
-                                            <input type="number" name="quantity" value="{{ $cart->qty }}"
-                                                id="qty{{ $cart->id }}" onchange="update_qty({{ $cart->id }})"
-                                                title="Qty" class="input-text qty text" min="1" max="">
-                                            <input type="button" value="+" class="" onclick="add({{ $cart->id }})">
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <a class="btn btn-danger" onclick="deleteFromCart({{ $cart->id }})">
-                                            <input type="hidden" id="{{ $cart->id }}" value="{{ $cart->rowId }}">
-                                            <i class="fa fa-times"> delete</i>
-                                        </a>
-                                    </td>
+                                    <th scope="col">products</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Action</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <div class="d-flex justify-content-end" id="carttotal2">
+                            </thead>
+                            <tbody id="carttable2" class="text-center">
 
-                        @php
-                            $total = Cart::subtotal();
-                            
-                            $tax = $total * 0.12;
-                            $service = $total * 0.14;
-                            $orderTotal = $total + $tax + $service;
-                            
-                        @endphp
-                        <div style="display:inline-block">
-                            <h5  id="total">Total: <span class="text-success">{{ $total }}</span></h5>
-                            <h5>Tax: <span class=" text-info"> {{ $tax }}</span></h5>
-                            <h5>Service: <span class=" text-info"> {{ $service }}</span></h5>
-                            <h4>Order Total: <span class="text-primary"> {{ $orderTotal }}</span></h4>
-                        </div>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    
+                    <div class="total" id="carttotal2">
                     </div>
                 </div>
-
             </div>
-        </section>
 
-
-        <!-- ======= Book A Table Section ======= -->
-        <section id="book-a-table" class="book-a-table">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-title">
-                    <h2>Reservation</h2>
-                    <p>Book your Order</p>
+            <div class="contacts">
+                <h3>
+                    <div class="container-fluid">Book Your Order</div>
+                </h3>
+                @if(session()->has('customer') && session()->has(session('customer')->phone_number))
+                <div class="container-fluid">
+                    <form action="{{ route('kuppitek.update', session(session('customer')->phone_number)->id) }}" method="post" class="form text-center">
+                        @csrf
+                        @method('PUT')
+                        <input type="submit" id="order_button" class="btn" value="Update Your Order" disabled />
+                    </form>
                 </div>
+                @else
+                {{ Cart::destroy() }}
+                <div class="container-fluid">
+                    <form action="{{ route('kuppitek.store') }}" method="post" class="form text-center">
+                        @include('dashboard.includes.errors')
+                        @csrf
+                        <input type="text" name="name" class="form-control" id="name2" placeholder="Your Name" required>
+                        <div class="validate"></div>
 
-                <form action="{{ route('kuppitek.store') }}" method="post" data-aos="fade-up" data-aos-delay="100">
-                    @csrf
+                        <input type="number" class="form-control" name="phone" id="phone1" placeholder="Your Phone Number"
+                            required>
+                        <div class="validate"></div>
 
-                    <div class="form-row">
-                        <div class="col-lg-4 col-md-6 form-group">
-                            <input type="text" name="name" class="form-control" id="name2" placeholder="Your Name" required>
-                            <div class="validate"></div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 form-group">
-                            <input type="text" class="form-control" name="phone" id="phone1" placeholder="Your Phone" required>
-                            <div class="validate"></div>
-                        </div>
-                    </div>
-                    <button type="submit" id="order_button" disabled>Book Your Order</button>
-
-                    <div class="text-center"></div>
-                </form>
-
+                        <input type="submit" id="order_button" class="btn" value="Book Your Order" disabled />
+                    </form>
+                </div>
+                @endif
             </div>
-        </section><!-- End Book A Table Section -->
-
-
-
+        @endif
 
     </main><!-- End #main -->
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $("#total").on("DOMSubtreeModified", "span", function() {
-            alert("hi");
-        });
-    });
-
-    function getitems(id) {
+    function getitems(id, subCategories, type) {
+        var url;
+        var div;
+        if (subCategories.length > 0) {
+            url = '/kuppitek/menu/getSubCategories' + '/' + id   
+        } 
+        else  {
+          if( type != "sub_category") {
+            $("#subCategories_html").html("");
+          }
+            url = '/kuppitek/menu/getitem' + '/' + id + '/' + type
+        }
         $.ajax({
             type: 'GET',
-            url: 'kuppitek/getitem' + '/' + id,
+            url: url,
             success: function(data) {
                 if (data) {
-                    $("#data_html").html(data);
-
+                    div = subCategories.length > 0 ? $("#subCategories_html") : $("#items_html"); 
+                    div.html(data);
                 } else {
                     console.log(data);
                     $("#data").html("<h5> no items </h5");
@@ -184,12 +132,10 @@
     function addTocart(id) {
         $.ajax({
             type: 'GET',
-            url: 'kuppitek/addorder' + '/' + id,
+            url: '/kuppitek/menu/addorder' + '/' + id,
             success: function(data) {
                 if (data) {
-                    // $("#carttable").html(data.html_cart);
                     $("#carttable2").html(data.html_cart);
-                    // $("#carttotal").html(data.sub);
                     $("#carttotal2").html(data.sub);
                     updateOrderButton()
                 } else {
@@ -202,24 +148,24 @@
 
 
     function deleteFromCart(id) {
+        var checkRemove = confirm('Do you want to remove this item?!');
+        if (checkRemove) {
+            var row_id = document.getElementById(id).value;
+            $.ajax({
+                type: 'GET',
+                url: '/kuppitek/menu/deleteitem' + '/' + row_id,
+                success: function(data) {
+                    if (data) {
+                        $("#carttable2").html(data.html_cart);
+                        $("#carttotal2").html(data.sub);
+                        updateOrderButton()
+                    } else {
 
-        var row_id = document.getElementById(id).value;
-        // var row_id = $("#"+id).val();
-
-        $.ajax({
-            type: 'GET',
-            url: '/kuppitek/deleteitem' + '/' + row_id,
-            success: function(data) {
-                if (data) {
-                    $("#carttable2").html(data.html_cart);
-                    $("#carttotal2").html(data.sub);
-                    updateOrderButton()
-                } else {
-
+                    }
                 }
-            }
 
-        });
+            });
+        }
     }
 
 
@@ -229,7 +175,7 @@
 
         $.ajax({
             type: 'GET',
-            url: '/kuppitek/updatecart' + '/' + row_id + '/' + qty,
+            url: '/kuppitek/menu/updatecart' + '/' + row_id + '/' + qty,
             success: function(data) {
                 if (data) {
                     $("#carttotal2").html(data.sub);

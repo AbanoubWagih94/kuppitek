@@ -21,5 +21,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Table::class, 'user_tables', 'user_id', 'table_id');
     }
     
+    public function counters() {
+        return $this->belongsToMany(Table::class, 'counter_users', 'user_id', 'counter_id');
+    }
+    
 
 }

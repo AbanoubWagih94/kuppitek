@@ -16,7 +16,7 @@ class CreateTablesTable extends Migration
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('table_number')->unique();
-            $table->boolean("table_status")->default(false);
+            $table->integer("table_seats_number")->default(0);
             $table->timestamps();
         });
     }

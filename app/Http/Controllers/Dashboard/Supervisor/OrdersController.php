@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Supervisor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -15,10 +16,8 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $page_name = "order";
-        $department_name = "order";
-        $orders = Order::all();
-        return view('dashboard.pages.supervisor.orders.index', ['orders'=> $orders, 'page_name' => $page_name, 'department_name' => $department_name]);
+        $orders = Order::whereDate('created_at', Carbon::today())->get();
+        return view('dashboard.pages.supervisor.orders.index', ['orders'=> $orders]);
     }
 
     /**
@@ -50,10 +49,8 @@ class OrdersController extends Controller
      */
     public function show($order_id)
     {
-        $page_name = "show_order";
-        $department_name = "show_order";
         $order = Order::find($order_id);
-        return view('dashboard.pages.supervisor.orders.show', ['order'=>$order, 'page_name'=>$page_name, 'department_name'=> $department_name]);
+        return view('dashboard.pages.supervisor.orders.show', ['order'=>$order]);
     
     }
 
@@ -88,6 +85,13 @@ class OrdersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+        if ($order) {
+            $order->delete();
+            session()->flash('alert_message', ['message' => "Success", 'icon' => 'success']);
+        } else {
+            session()->put('error', 'Something goes wrong please try again later');
+        }
+        return redirect('/dashboard/orders');
     }
 }

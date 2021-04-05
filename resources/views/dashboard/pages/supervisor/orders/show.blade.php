@@ -5,7 +5,6 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title"> الطلبات الحالية</h3>
             </div>
         </div>
          <div class="row">
@@ -19,7 +18,7 @@
                             <table class="table table-de mb-0">
                                 <thead>
                                     <tr>
-                                        <th></th>
+                                        <th>#</th>
                                         <th>Customer Name</th>
                                         <th>Item</th>
                                         <th>Quantity</th>
@@ -35,7 +34,7 @@
                                         <td>ِ{{ $item->title }}</td>
                                         <td> {{ $item->pivot->item_qty  }} </td>
                                         <td>
-                                            {{  $item->cost *$item->pivot->item_qty  }}
+                                            {{  $item->selling_price * $item->pivot->item_qty  }}
                                         </td>
                                     </tr>
                                     

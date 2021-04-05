@@ -16,6 +16,7 @@
         "illuminate/events": "^8.32",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "nesbot/carbon": "^2.46",
         "simplesoftwareio/simple-qrcode": "^4.2"
     },
     "require-dev": {

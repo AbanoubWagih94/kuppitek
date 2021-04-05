@@ -47,18 +47,19 @@ class TablesController extends Controller
     {
         $request->validate([
             'table_number' => 'required|unique:tables',
+            'table_seats_number'=> 'required'
         ]);
 
         $table = Table::create([
             'table_number' => $request->table_number,
-            'table_status' => 0
+            'table_seats_number' => $request->table_seats_number
         ]);
 
         if (!$table) {
-            session()->flash('alert_message', ['message' => "something goes wrong", 'icon' => 'error']);
+            session()->flash('alert_message', ['message' => "something goes wrong please try again later!", 'icon' => 'error']);
             return redirect()->back();
         }
-        session()->flash('alert_message', ['message' => "success", 'icon' => 'success']);
+        session()->flash('alert_message', ['message' => "New table added", 'icon' => 'success']);
 
         return redirect('/dashboard/tables');
     }
@@ -100,7 +101,8 @@ class TablesController extends Controller
     public function update(Request $request, $id)
     {
         $table = Table::find($id);
-
+        $table->table_seats_number = $request->table_seats_number;
+        $table->save();
         if (!$table) {
             session()->flash('alert_message', ['message' => "Something goes wrong please try again!", 'icon' => 'error']);;
             return redirect()->back();

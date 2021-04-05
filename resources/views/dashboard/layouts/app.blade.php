@@ -6,8 +6,9 @@
         <div class="m-5">
             @yield('dashboard.content')                        
         </div>
-        @include('dashboard.includes.scripts')
+        
         @include('dashboard.includes.footer') 
+        @include('dashboard.includes.scripts')
         @include('dashboard.includes.alerts')
     </body>
 </html>

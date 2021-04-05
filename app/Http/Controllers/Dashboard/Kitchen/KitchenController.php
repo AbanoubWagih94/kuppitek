@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard\Kitchen;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderItems;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class KitchenController extends Controller
@@ -15,11 +17,7 @@ class KitchenController extends Controller
      */
     public function index()
     {
-        $page_name = "kitchen";
-        $department_name = "kitchen";
-        $orders = Order::where('order_status', 2)->get();
-        return view('dashboard.pages.kitchen.index', ['orders'=> $orders, 'page_name' => $page_name, 'department_name' => $department_name]);
-    
+        return view('dashboard.pages.kitchen.index');
     }
 
     /**
@@ -51,10 +49,8 @@ class KitchenController extends Controller
      */
     public function show($order_id)
     {
-        $page_name = "order_details";
-        $department_name = "order_details";
         $order = Order::find($order_id);
-        return view('dashboard.pages.kitchen.show', ['order'=>$order, 'page_name'=>$page_name, 'department_name'=> $department_name]);
+        return view('dashboard.pages.kitchen.show', ['order' => $order]);
     }
 
     /**
@@ -91,11 +87,54 @@ class KitchenController extends Controller
         //
     }
 
-    public function finishOrder($order_id) {
+
+    public function getOrders()
+    {
+        $orders = Order::where([
+            ['order_status', '<=', 3],
+            ['created_at', '>', Carbon::today()]
+        ])->get();
+        return view('dashboard.pages.kitchen.orders', ['orders' => $orders]);
+    }
+
+    public function acceptOrder($order_id)
+    {
         $order = Order::find($order_id);
-        $order->order_status = 3 ;
+        $order->order_status = 3;
         $order->save();
-        session()->flash('alert_message', ['message'=>"Success", 'icon'=>'success']);
-        return redirect('dashboard/kitchen'); 
+        session()->flash('alert_message', ['message' => "Order Accepted", 'icon' => 'success']);
+        return redirect()->back();
+    }
+
+    public function finishProduct($order_id, $product_id)
+    {
+        $item = OrderItems::where(
+            [
+                ['order_id', $order_id],
+                ['product_id', $product_id]
+            ]
+        )->first();
+        $item->item_status = true;
+        $item->save();
+        if ($item) {
+            $items = OrderItems::where([
+                ['order_id', $order_id],
+                ['item_status', false]
+            ])->get();
+            if ($items->count() < 1) {
+                $order = Order::find($order_id);
+                $order->order_status = 4;
+                $order->save();
+                if ($order) {
+                    session()->flash('alert_message', ['message' => "This Order If Finished", 'icon' => 'success']);
+                    return redirect('dashboard/kitchen/show/orders');
+                }
+                session()->flash('alert_message', ['message' => "Something goes wrong please try again later !", 'icon' => 'success']);
+            }
+            session()->flash('alert_message', ['message' => "This Item Served", 'icon' => 'success']);
+        } else {
+            session()->flash('alert_message', ['message' => "Something goes wrong please try again later !", 'icon' => 'success']);
+        }
+        return redirect()->back();
     }
 }

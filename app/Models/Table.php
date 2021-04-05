@@ -9,7 +9,7 @@ class Table extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['table_number', 'table_status'];
+    protected $fillable = ['table_number', 'table_seats_number'];
 
 
     public function users() {

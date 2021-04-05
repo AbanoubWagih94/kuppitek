@@ -44,16 +44,16 @@ class ProductsController extends Controller
             'category_id' => 'required',
             'cost_price' => 'required',
             'selling_price' => 'required',
-            'ingredients' => 'required'
         ]);
         $image = "";
         if ($request->hasFile('image')) {
-            $image = time() . $request->image->getClientOriginalName() . '.' . $request->image->extension();
+            $image = time() . $request->image->getClientOriginalName();
             $request->image->move(public_path('assets/uploads/images/products'), $image);
         }
         $product = Product::create([
             'title' => $request->title,
             'category_id' => $request->category_id,
+            'sub_category_id' => $request->sub_category_id == 0 ? NULL : $request->sub_category_id,
             'quantity' => 1,
             'cost_price' => $request->cost_price,
             'selling_price' => $request->selling_price,
@@ -108,7 +108,6 @@ class ProductsController extends Controller
             'category_id' => 'required',
             'cost_price' => 'required',
             'selling_price' => 'required',
-            'ingredients' => 'required'
         ]);
         $product = Product::find($id);
         $image = $product->image_path;
@@ -116,13 +115,14 @@ class ProductsController extends Controller
             if ($image!="" && file_exists(public_path(('assets/uploads/images/staff/products' . $image)))) {
                 unlink(public_path(('assets/uploads/images/products/'.$image)));
             }
-            $image = time() . $request->image->getClientOriginalName() . '.' . $request->image->extension();
+            $image = time() . $request->image->getClientOriginalName();
             $request->image->move(public_path('assets/uploads/images/products'), $image);
         }
 
         $product = $product->update([
             'title' => $request->title,
             'category_id' => $request->category_id,
+            'sub_category_id' => $request->sub_category_id == 0 ? NULL : $request->sub_category_id,
             'cost_price' => $request->cost_price,
             'selling_price' => $request->selling_price,
             'ingredients' => $request->ingredients,
@@ -154,5 +154,14 @@ class ProductsController extends Controller
             session()->put('error', 'Something goes wrong please try again later');
         }
         return redirect('/dashboard/products');
+    }
+
+    public function subCategories(Request $request, $id) {
+        if ($request->ajax()) {
+            $category = MenuCategories::find($id);
+            return response()->json([
+                'subCategories' => $category->subCategories 
+            ]);
+        }
     }
 }

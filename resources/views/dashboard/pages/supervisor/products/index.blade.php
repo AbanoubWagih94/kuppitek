@@ -19,6 +19,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Title</th>
+                                        <th>Category</th>
                                         <th>ِAction</th>
                                     </tr>
                                 </thead>
@@ -27,6 +28,7 @@
                                     <tr>
                                         <td>{{ $product->id }}</td>
                                         <td>ِ{{ $product->title }}</td>
+                                        <td>{{ $product->category->title }}</td>
                                         <td>
                                             <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm round btn-warning"><i class="fas fa-eye"></i></a>
                                             <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm round btn-info"><i class="fas fa-edit"></i></a>

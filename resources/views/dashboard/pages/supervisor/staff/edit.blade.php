@@ -37,15 +37,18 @@
                                   </div>
                                   <div class="form-group">
                                     <label for="country_id">Member Country ID</label>
-                                    <input type="text" name="country_id" id="country_id" class="form-control" value="{{ $user->country_id }}"  placeholder="Enter member country ID" required>
+                                    <input type="number" name="country_id" id="country_id" class="form-control" value="{{ $user->country_id }}"  placeholder="Enter member country ID" required>
                                   </div>
                                   <div class="form-group">
                                     <label for="phone_number">Member Phone Number</label>
-                                    <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ $user->mobile_number }}"  placeholder="Enter member phone number" required>
+                                    <input type="number" name="phone_number" id="phone_number" class="form-control" value="{{ $user->mobile_number }}"  placeholder="Enter member phone number" required>
                                   </div>
                                   <div class="form-group">
                                     <label for="image">Member Image</label>
                                     <input type="file" class="form-control-file" name="image" id="image">
+                                    <div class="mt-2">
+                                      <img src="{{ $user->image_path != " "? asset('assets/uploads/images/staff/'.$user->image_path) : " "  }}" id="img-preview" width="200px" /> 
+                                    </div>
                                   </div>
                                   <div class="form-group d-flex">
                                   <button type="submit" class="btn btn-primary">Update</button>

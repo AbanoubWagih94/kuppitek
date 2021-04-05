@@ -17,15 +17,19 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->text('title', 200);
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('sub_category_id')->nullable();
             $table->string('quantity');
             $table->string('cost_price');
             $table->string('selling_price');
-            $table->text('ingredients');
+            $table->text('ingredients')->nullable();
             $table->boolean('discount')->default(false);
             $table->integer('discount_value')->default(0);
             $table->text('image_path')->default(null);
-            $table->timestamps();
+            $table->boolean('add_to_pos')->default(false);
+            $table->boolean('add_to_digital_menu')->default(false);
             $table->foreign('category_id')->references('id')->on('menu_categories')->onDelete('cascade');;
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade');;
+            $table->timestamps();
         });
     }
 

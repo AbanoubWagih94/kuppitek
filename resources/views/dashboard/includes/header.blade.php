@@ -32,4 +32,5 @@
   <link href="{{asset('website/assets/vendor/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
   <link href="{{asset('website/assets/vendor/venobox/venobox.css')}}" rel="stylesheet">
   <link href="{{asset('website/assets/vendor/aos/aos.css')}}" rel="stylesheet">
+  
 </head>
